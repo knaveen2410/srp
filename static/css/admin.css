@@ -1,0 +1,175 @@
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background: #817e7e;
+    color: #333;
+}
+.Baa{
+    margin-top: 20px;
+    text-align: center;
+    color: #303034;
+
+}
+
+/* Container styling */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly opaque white */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Header styling */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    color: #4CAF50; /* Updated to primary accent color */
+}
+
+header p {
+    font-size: 16px;
+    color: #666; /* Grey color for subtitle */
+}
+
+/* Dashboard actions styling */
+.dashboard-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.dashboard-actions .button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #4CAF50; /* Primary button color */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.dashboard-actions .button:hover {
+    background-color: #388E3C; /* Darker green on hover */
+}
+
+/* Dashboard layout for statistics and job postings */
+.dashboard-layout {
+    display: flex;
+    justify-content: space-between; /* Space between sections */
+}
+
+/* Statistics section */
+.statistics {
+    margin-bottom: 20px;
+    width: 30%; /* Set width of statistics */
+}
+
+.statistics h2 {
+    padding-top: 25px;
+    padding-bottom: 25px;
+    color: #4CAF50; /* Primary color for section header */
+}
+
+/* Job postings section */
+.job-postings {
+    margin-top: 20px;
+    width: 65%; /* Set width of job postings */
+}
+
+.job-postings h2 {
+    padding-bottom: 25px;
+    color: #4CAF50; /* Primary color for section header */
+}
+
+/* Statistics item styling */
+.statistic-item {
+    background-color: rgba(230, 230, 230, 0.8);
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.statistic-item h4 {
+    font-size: 18px;
+    color: #333;
+}
+
+.statistic-item p {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Job postings table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #4CAF50; /* Primary color for headers */
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f1f1; /* Light grey on hover */
+}
+
+/* Action links styling */
+.action-links {
+    display: flex;
+    gap: 10px; /* Space between action buttons */
+}
+
+.btn {
+    padding: 5px 10px;
+    background-color: #4CAF50; /* Primary color for buttons */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #388E3C; /* Darker green on hover */
+}
+
+.btn-delete {
+    background-color: #f44336; /* Red for delete button */
+}
+
+.btn-delete:hover {
+    background-color: #e53935; /* Darker red on hover */
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+    .dashboard-layout {
+        flex-direction: column; /* Stack on small screens */
+    }
+
+    .statistics,
+    .job-postings {
+        width: 100%; /* Full width for both sections */
+    }
+}

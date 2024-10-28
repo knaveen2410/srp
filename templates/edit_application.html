@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Edit Application</title>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Edit Application</h2>
+        <form method="POST" action="{{ url_for('edit_application', application_id=application.id) }}">
+            <label>Candidate Name</label>
+            <input type="text" name="candidate_name" value="{{ application.candidate_name }}" required>
+
+            <label>Job Title</label>
+            <input type="text" name="job_title" value="{{ application.job_title }}" required>
+
+            <label>Status</label>
+            <select name="status" required>
+                <option value="{{ application.status }}" selected>{{ application.status }}</option>
+                <option value="Pending">Pending</option>
+                <option value="Interview Scheduled">Interview Scheduled</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Hired">Hired</option>
+            </select>
+
+            <input type="submit" value="Update Application">
+        </form>
+        <p><a href="{{ url_for('view_applications') }}">Back to Applications</a></p>
+    </div>
+</body>
+</html>

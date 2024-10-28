@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Job Posting</title>
+    <style> 
+        /* Body styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #007bff;
+    margin: 0;
+    padding: 40px;
+}
+
+/* Form container */
+.form-container {
+    max-width: 1200px;
+    margin: auto;
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+h2 {
+    text-align: center;
+    color: #007bff;
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Form row for columns */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+/* Form column for each side */
+.form-column {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Form labels */
+label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: black;
+}
+
+/* Input and Textarea fields */
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+textarea:focus,
+select:focus {
+    border-color: #007bff;
+    outline: none;
+    background-color: #fff;
+}
+
+/* Textarea styling */
+textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Button styling */
+.form-actions {
+    text-align: center;
+    margin-top: 30px;
+}
+
+input[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+input[type="submit"]:active {
+    background-color: #004080;
+}
+
+/* Link styling */
+p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+a {
+    color: #007bff;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .form-column {
+        width: 100%;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Edit Job Posting</h2>
+        <form method="POST" action="{{ url_for('edit_job', job_id=job.id) }}">
+            <div class="form-row">
+                <div class="form-column">
+                    <label for="job_title">Job Title</label>
+                    <input type="text" id="job_title" name="job_title" value="{{ job.job_title }}" required>
+
+                    <label for="job_location">Job Location</label>
+                    <input type="text" id="job_location" name="job_location" value="{{ job.job_location }}" required>
+
+                    <label for="department">Department</label>
+                    <select id="department" name="department" required>
+                        <option value="{{ job.department }}" selected>{{ job.department }}</option>
+                        <option value="HR">HR</option>
+                        <option value="IT">IT</option>
+                        <option value="Marketing">Marketing</option>
+                        <option value="Sales">Sales</option>
+                    </select>
+
+                    <label for="employment_type">Employment Type</label>
+                    <select id="employment_type" name="employment_type" required>
+                        <option value="{{ job.employment_type }}" selected>{{ job.employment_type }}</option>
+                        <option value="Full-time">Full-time</option>
+                        <option value="Part-time">Part-time</option>
+                        <option value="Contract">Contract</option>
+                        <option value="Internship">Internship</option>
+                    </select>
+
+                    <label for="salary_range">Salary Range</label>
+                    <input type="text" id="salary_range" name="salary_range" value="{{ job.salary_range }}" required>
+
+                    <label for="application_deadline">Application Deadline</label>
+                    <input type="date" id="application_deadline" name="application_deadline" value="{{ job.application_deadline }}" required>
+                </div>
+
+                <div class="form-column">
+                    <label for="job_description">Job Description</label>
+                    <textarea id="job_description" name="job_description" required>{{ job.job_description }}</textarea>
+
+                    <label for="required_qualifications">Required Qualifications</label>
+                    <textarea id="required_qualifications" name="required_qualifications" required>{{ job.required_qualifications }}</textarea>
+
+                    <label for="preferred_qualifications">Preferred Qualifications</label>
+                    <textarea id="preferred_qualifications" name="preferred_qualifications">{{ job.preferred_qualifications }}</textarea>
+
+                    <label for="responsibilities">Responsibilities</label>
+                    <textarea id="responsibilities" name="responsibilities" required>{{ job.responsibilities }}</textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <input type="submit" name="action" value="Update Job">
+            </div>
+        </form>
+        <p><a href="{{ url_for('view_jobs') }}">Back to Job Postings</a></p>
+        <p>
+            {% if session['role'] == 'HR Manager' %}
+                <a href="{{ url_for('hr_dashboard') }}">Back to HR Dashboard</a>
+            {% elif session['role'] == 'Admin' %}
+                <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+            {% elif session['role'] == 'Candidate' %}
+                <a href="{{ url_for('candidate_dashboard') }}">Back to Candidate Dashboard</a>
+            {% elif session['role'] == 'Interviewer' %}
+                <a href="{{ url_for('interviewer_dashboard') }}">Back to Interviewer Dashboard</a>
+            {% elif session['role'] == 'Recruiter' %}
+                <a href="{{ url_for('recruiter_dashboard') }}">Back to Recruiter Dashboard</a>
+            {% endif %}
+        </p>
+    </div>
+</body>
+</html>

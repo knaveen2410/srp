@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Candidates</title>
+    <style>
+        body {
+           /* background: url('https://www.wallpapertip.com/wmimgs/66-666819_website-design-background-creative-background-image-for-website.jpg');*/
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9; /* Light background color */
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly white for better readability */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        
+        h2 {
+            color: #333;
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th, td {
+            padding: 15px;
+            border: 1px solid #ddd;
+            text-align: left;
+            font-size: 16px;
+        }
+        
+        th {
+            background-color: #4CAF50; /* Primary accent color */
+            color: white;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        
+        tr:hover {
+            background-color: #e9ecef;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #4CAF50; /* Primary color for links */
+        }
+        
+        .btn {
+            background-color: #4CAF50; /* Primary button color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-block;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #388E3C; /* Darker shade for hover */
+        }
+        
+        p {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        a {
+            text-decoration: none;
+            color: #ffffff;
+            background-color: #4CAF50; /* Primary color for buttons */
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        
+        a:hover {
+            background-color: #388E3C; /* Darker shade for hover */
+            text-decoration: none;
+        }
+        
+        a:active {
+            background-color: #2E7D32; /* Darker shade when active */
+        }
+        
+        a:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Focus shadow matching primary color */
+        }
+        
+        
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Candidates</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for candidate in candidates %}
+                <tr>
+                    <td>{{ candidate.name }}</td>
+                    <td>{{ candidate.username }}</td>
+                    <td>{{ candidate.email }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>
+            {% if session['role'] == 'HR Manager' %}
+                <a href="{{ url_for('hr_dashboard') }}">Back to HR Dashboard</a>
+            {% elif session['role'] == 'Admin' %}
+                <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+            {% elif session['role'] == 'Candidate' %}
+                <a href="{{ url_for('candidate_dashboard') }}">Back to Candidate Dashboard</a>
+            {% elif session['role'] == 'Interviewer' %}
+                <a href="{{ url_for('interviewer_dashboard') }}">Back to Interviewer Dashboard</a>
+            {% elif session['role'] == 'Recruiter' %}
+                <a href="{{ url_for('recruiter_dashboard') }}">Back to Recruiter Dashboard</a>
+            {% endif %}
+        </p>
+    </div>
+</body>
+</html>

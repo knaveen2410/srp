@@ -1,0 +1,110 @@
+/* General Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('https://4kwallpapers.com/images/walls/thumbs/19118.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Styling for the select dropdown to make it 100% width */
+select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box; /* Ensures padding is included in width */
+}
+
+
+/* Container for all elements */
+.container {
+    display: flex; /* Use Flexbox for layout */
+    max-width: 1200px; /* Maximum width of container */
+    width: 100%; /* Full width */
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Hide overflow */
+}
+
+/* Left side styling */
+.left-side {
+    flex: 1; /* Take up half of the container */
+    background-color: rgba(255, 255, 255, 0.9); /* Light background */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+}
+
+.welcome-image {
+    max-width: 100%; /* Make image responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Right side styling */
+.right-side {
+    flex: 1; /* Take up half of the container */
+    background-color: rgba(230, 230, 230, 0.9); /* Slightly darker background */
+    padding: 30px;
+}
+
+/* Heading and form styles */
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #4CAF50; /* Primary accent color for headings */
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"]
+ {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50; /* Primary button color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #388E3C; /* Darker green on hover */
+}
+
+p {
+    text-align: center;
+    margin-top: 20px;
+}
+
+a {
+    color: #4CAF50; /* Primary link color */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}

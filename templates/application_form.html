@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/appli_form.css') }}">
+    <title>Apply for {{ job_title }}</title>
+</head>
+<body>
+    <div class="container">
+        <div class="job-description">
+            <h2>Job Description</h2>
+            <p><strong>Title:</strong> {{ job_title }}</p><br>
+            <p><strong>Description:</strong> {{ job_description }}</p><br>
+            <p><strong>Department:</strong> {{ department }}</p><br>
+            <p><strong>Location:</strong> {{ job_location }}</p><br>
+            <p><strong>Employment Type:</strong> {{ employment_type }}</p><br>
+            <p><strong>Salary Range:</strong> {{ salary_range }}</p><br>
+            <p><strong>Application Deadline:</strong> {{ application_deadline }}</p><br>
+            <p><strong>Required Qualifications:</strong> {{ required_qualifications }}</p><br>
+            <p><strong>Preferred Qualifications:</strong> {{ preferred_qualifications }}</p><br>
+            <p><strong>Responsibilities:</strong> {{ responsibilities }}</p>
+        </div>
+        <div class="application-form">
+            <h2>Apply for {{ job_title }}</h2>
+            
+            
+            <form action="{{ url_for('apply_job', job_id=job_id) }}" method="POST" enctype="multipart/form-data">
+                <label for="candidate_name">Candidate Name:</label>
+                <input type="text" id="candidate_name" name="candidate_name" required>
+                
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+                
+                <label for="resume">Resume:</label>
+                <input type="file" id="resume" name="resume" required>
+                
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" required>
+                
+                <label for="phone_number">Phone Number:</label>
+                <input type="text" id="phone_number" name="phone_number" required>
+                
+                <input type="submit" value="Submit Application">
+                <p>
+                    {% if session['role'] == 'HR Manager' %}
+                        <a href="{{ url_for('hr_dashboard') }}">Back to HR Dashboard</a>
+                    {% elif session['role'] == 'Admin' %}
+                        <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+                    {% elif session['role'] == 'Candidate' %}
+                        <a href="{{ url_for('candidate_dashboard') }}">Back to Candidate Dashboard</a>
+                    {% elif session['role'] == 'Interviewer' %}
+                        <a href="{{ url_for('interviewer_dashboard') }}">Back to Interviewer Dashboard</a>
+                    {% elif session['role'] == 'Recruiter' %}
+                        <a href="{{ url_for('recruiter_dashboard') }}">Back to Recruiter Dashboard</a>
+                    {% endif %}
+                </p>
+            </form>
+        </div>
+        
+    </div>
+    
+</body>
+</html>

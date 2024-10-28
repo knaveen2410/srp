@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/create_job.css') }}">
+    <title>Create Job Posting</title>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Create Job Posting</h2>
+        <form method="POST" action="/create_job">
+            <div class="form-row">
+                <label>Job Title</label>
+                <input type="text" name="job_title" placeholder="Enter the job title" required>
+            </div>
+
+            <div class="form-row">
+                <label>Job Description</label>
+                <textarea name="job_description" placeholder="Enter the job description" required minlength="50"></textarea>
+            </div>
+
+            <div class="form-row">
+                <label>Department</label>
+                <select name="department" required>
+                    <option value="" disabled selected>Select a department</option>
+                    <option value="HR">HR</option>
+                    <option value="IT">IT</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="Sales">Sales</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label>Job Location</label>
+                <input type="text" name="job_location" placeholder="Enter the job location" required>
+            </div>
+
+            <div class="form-row">
+                <label>Employment Type</label>
+                <select name="employment_type" required>
+                    <option value="" disabled selected>Select employment type</option>
+                    <option value="Full-time">Full-time</option>
+                    <option value="Part-time">Part-time</option>
+                    <option value="Contract">Contract</option>
+                    <option value="Internship">Internship</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <label>Salary Range</label>
+                <input type="text" name="salary_range" placeholder="Enter the salary range" required pattern="\d+">
+            </div>
+
+            <div class="form-row">
+                <label>Application Deadline</label>
+                <input type="date" name="application_deadline" required>
+            </div>
+
+            <div class="form-row">
+                <label>Required Qualifications</label>
+                <textarea name="required_qualifications" placeholder="Enter the required qualifications" required></textarea>
+            </div>
+
+            <div class="form-row">
+                <label>Preferred Qualifications</label>
+                <textarea name="preferred_qualifications" placeholder="Enter the preferred qualifications"></textarea>
+            </div>
+
+            <div class="form-row">
+                <label>Responsibilities</label>
+                <textarea name="responsibilities" placeholder="Enter the job responsibilities" required></textarea>
+            </div>
+
+            <div class="button-group">
+                <input type="submit" name="action" value="Save as Draft">
+                <input type="submit" name="action" value="Publish">
+            </div>
+        </form>
+        <p>
+            {% if session['role'] == 'HR Manager' %}
+                <a href="{{ url_for('hr_dashboard') }}">Back to HR Dashboard</a>
+            {% elif session['role'] == 'Admin' %}
+                <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+            {% elif session['role'] == 'Candidate' %}
+                <a href="{{ url_for('candidate_dashboard') }}">Back to Candidate Dashboard</a>
+            {% elif session['role'] == 'Interviewer' %}
+                <a href="{{ url_for('interviewer_dashboard') }}">Back to Interviewer Dashboard</a>
+            {% elif session['role'] == 'Recruiter' %}
+                <a href="{{ url_for('recruiter_dashboard') }}">Back to Recruiter Dashboard</a>
+            {% endif %}
+        </p>
+    </div>
+</body>
+</html>

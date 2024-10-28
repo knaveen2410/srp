@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ma.css') }}">
+    <title>Manage Applications</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Manage Applications</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Applicant Name</th>
+                    <th>Job Title</th>
+                    <th>Resume</th> <!-- Resume column -->
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for application in applications %}
+                <tr>
+                    <td>{{ application.applicant_name }}</td>
+                    <td>{{ application.job_title }}</td>
+                    <td>
+                        <a href="#" onclick="openResumeModal('{{ url_for('view_resume', filename=application.resume) }}')">View Resume</a>
+                    </td>
+                    <td>
+                        <form action="{{ url_for('update_application_status', application_id=application.id) }}" method="POST" style="display:inline;">
+                            <select name="status" onchange="this.form.submit()">
+                                <option value="Under Review" {% if application.status == 'Under Review' %}selected{% endif %}>Under Review</option>
+                                <option value="Accepted" {% if application.status == 'Accepted' %}selected{% endif %}>Accepted</option>
+                                <option value="Rejected" {% if application.status == 'Rejected' %}selected{% endif %}>Rejected</option>
+                            </select>
+                        </form>
+                    </td>
+                    <td>
+                        <a href="{{ url_for('schedule_interview', application_id=application.id) }}">Schedule Interview</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+     <!-- Modal Structure -->
+     <div id="resumeModal" style="display: none;">
+        <div class="modal-content">
+            <span onclick="closeResumeModal()" class="close">&times;</span>
+            <iframe id="resumeIframe" width="100%" height="500px" style="border: none;"></iframe>
+        </div>
+    </div>
+
+    <script>
+        function openResumeModal(resumeUrl) {
+            document.getElementById('resumeIframe').src = resumeUrl;
+            document.getElementById('resumeModal').style.display = 'flex'; // Use flex to center
+        }
+
+        function closeResumeModal() {
+            document.getElementById('resumeModal').style.display = 'none';
+            document.getElementById('resumeIframe').src = '';  // Clear iframe src
+        }
+    </script>
+
+    <style>
+        /* Modal styling */
+        #resumeModal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: white;
+            padding: 20px;
+            width: 80%;
+            max-width: 800px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+        }
+    </style>
+
+</style>
+        <p>
+            {% if session['role'] == 'HR Manager' %}
+                <a href="{{ url_for('hr_dashboard') }}">Back to HR Dashboard</a>
+            {% elif session['role'] == 'Admin' %}
+                <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+            {% elif session['role'] == 'Candidate' %}
+                <a href="{{ url_for('candidate_dashboard') }}">Back to Candidate Dashboard</a>
+            {% elif session['role'] == 'Interviewer' %}
+                <a href="{{ url_for('interviewer_dashboard') }}">Back to Interviewer Dashboard</a>
+            {% elif session['role'] == 'Recruiter' %}
+                <a href="{{ url_for('recruiter_dashboard') }}">Back to Recruiter Dashboard</a>
+            {% endif %}
+        </p>
+    </div>
+</body>
+</html>

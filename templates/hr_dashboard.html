@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hr.css') }}">
+    <title>HR Dashboard</title>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1>Welcome, {{ username }}!</h1>
+            <p id="current-time">{{ current_time }}</p>
+        </div>
+    </header>
+    <div class="container">
+        <nav class="navigation">
+            <ul>
+                <li><a href="{{ url_for('view_jobs') }}">Manage Job Postings</a></li>
+                <li><a href="{{ url_for('manage_applications') }}">Manage Applications</a></li>
+                <li><a href="{{ url_for('generate_reports') }}">Generate Reports</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+
+        <div class="section">
+            <div class="btn-container">
+                <p><a class="btn" href="{{ url_for('create_job') }}">Create New Job Posting</a></p>
+                <p><a class="btn" href="{{ url_for('view_interviews') }}">View Scheduled Interviews</a></p>
+                <p><a class="btn" href="{{ url_for('view_candidates') }}">View Candidates</a></p>
+            </div>            
+            <h2>Job Postings</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Department</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in job_postings %}
+                <tr>
+                    <td>{{ job.job_title }}</td>
+                    <td>{{ job.department }}</td>
+                    <td>{{ job.status }}</td>
+                    <td class="action-links">
+                        {% if session['role'] == 'Candidate' %}
+                            <form action="{{ url_for('apply_job', job_id=job.id) }}" method="POST" style="display:inline;">
+                                <input type="submit" value="Apply" class="btn">
+                            </form>
+                        {% elif session['role'] in ['HR Manager', 'Admin'] %}
+                            <form action="{{ url_for('edit_job', job_id=job.id) }}" method="GET" style="display:inline;">
+                                <input type="submit" value="Edit" class="btn">
+                            </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+            
+        </div>
+
+        <section class="statistics">
+            <h2>Dashboard Statistics</h2>
+            <div class="statistic-item">
+                <h4>Total Job Postings</h4>
+                <p>{{ total_jobs }}</p>
+            </div>
+            <div class="statistic-item">
+                <h4>Total Applications</h4>
+                <p>{{ total_applications }}</p>
+            </div>
+            <div class="statistic-item">
+                <h4>Total Interviews Scheduled</h4>
+                <p>{{ total_interviews }}</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

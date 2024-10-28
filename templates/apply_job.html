@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Apply for Job</title>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Apply for Job</h2>
+        <form method="POST" action="{{ url_for('apply_job', job_id=job_id) }}">
+            <label>Your name</label>
+            <input type="text" name="applicant_name" required>
+
+            <label>Resume</label>
+            <input type="file" name="resume" required>
+
+            <input type="submit" value="Submit Application">
+        </form>
+        <p><a href="{{ url_for('job_postings') }}">Back to Job Postings</a></p>
+    </div>
+</body>
+</html>

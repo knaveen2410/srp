@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cf.css') }}">
+    <title>Your Interview Feedback</title>
+</head>
+<body>
+    <div class="feedback-container">
+        <h2>Your Interview Feedback</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Feedback</th>
+                    <th>Rating</th>
+                    <th>Selection Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feedback in feedback_data %}
+                    <tr>
+                        <td>{{ feedback.name }}</td>
+                        <td>{{ feedback.feedback }}</td>
+                        <td>{{ feedback.rating }}</td>
+                        <td>{{ feedback.selection_status }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>
+            <a href="{{ url_for('candidate_dashboard') }}">Back to Dashboard</a>
+        </p>
+    </div>
+</body>
+</html>

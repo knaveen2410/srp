@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/viewI.css') }}">
+    <title>View Scheduled Interviews</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Scheduled Interviews</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Candidate Name</th>  <!-- Added Candidate Name Column -->
+                    <th>Interview Date</th>
+                    <th>Interview Time</th>
+                    <th>Interviewers</th>
+                    <th>Actions</th>  <!-- Added Actions Column -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for interview in interviews %}
+                <tr>
+                    <td>{{ interview.candidate_name }}</td>  <!-- Display Candidate Name -->
+                    <td>{{ interview.interview_date }}</td>
+                    <td>{{ interview.interview_time }}</td>
+                    <td>{{ interview.interviewers }}</td>
+                    <td>
+                        <a href="{{ url_for('edit_interview', interview_id=interview.id) }}">Edit</a> |
+                        <a href="{{ url_for('delete_interview', interview_id=interview.id) }}">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p>
+            {% if session['role'] == 'HR Manager' %}
+                <a href="{{ url_for('hr_dashboard') }}">Back to HR Dashboard</a>
+            {% elif session['role'] == 'Admin' %}
+                <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+            {% elif session['role'] == 'Candidate' %}
+                <a href="{{ url_for('candidate_dashboard') }}">Back to Candidate Dashboard</a>
+            {% elif session['role'] == 'Interviewer' %}
+                <a href="{{ url_for('interviewer_dashboard') }}">Back to Interviewer Dashboard</a>
+            {% elif session['role'] == 'Recruiter' %}
+                <a href="{{ url_for('recruiter_dashboard') }}">Back to Recruiter Dashboard</a>
+            {% endif %}
+        </p>
+    </div>
+</body>
+</html>

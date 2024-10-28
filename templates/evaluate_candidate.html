@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Evaluate Candidate</title>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Evaluate Candidate</h2>
+        <form method="POST" action="{{ url_for('evaluate_candidate', application_id=application_id) }}">
+            <label>Feedback</label>
+            <textarea name="feedback" required></textarea>
+
+            <label>Rating (1-5)</label>
+            <input type="number" name="rating" min="1" max="5" required>
+
+            <label>Selection Status</label>
+            <select name="selection_status" required>
+                <option value="On Hold">On Hold</option>
+                <option value="Selected">Selected</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+
+            <input type="submit" value="Submit Evaluation">
+        </form>
+        <p><a href="{{ url_for('manage_applications') }}">Back to Applications</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>View Application</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Application Details</h2>
+        <table>
+            <tr>
+                <th>Applicant Name:</th>
+                <td>{{ application.applicant_name }}</td>
+            </tr>
+            <tr>
+                <th>Job Title:</th>
+                <td>{{ application.job_title }}</td>
+            </tr>
+            <tr>
+                <th>Status:</th>
+                <td>{{ application.status }}</td>
+            </tr>
+            <tr>
+                <th>Resume:</th>
+                <td>{{ application.resume_link }}</td>
+            </tr>
+            <tr>
+                <th>Cover Letter:</th>
+                <td>{{ application.cover_letter }}</td>
+            </tr>
+            <tr>
+                <th>Qualifications:</th>
+                <td>{{ application.qualifications }}</td>
+            </tr>
+        </table>
+        <p><a href="{{ url_for('manage_applications') }}">Back to Manage Applications</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Recruiter Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Recruiter Dashboard</h2>
+        <p>Welcome, {{ session['role'] }}!</p>
+        
+        <div class="dashboard-links">
+            <h3>Available Actions</h3>
+            <ul>
+                <li><a href="{{ url_for('view_candidates') }}" class="button">View Candidates</a></li>
+                <li><a href="{{ url_for('view_jobs') }}" class="button">View Job Postings</a></li>
+                <li><a href="{{ url_for('manage_applications') }}" class="button">Manage Applications</a></li>
+                <li><a href="{{ url_for('logout') }}" class="button">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

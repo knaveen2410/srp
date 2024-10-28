@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/InterDash.css') }}">
+    <title>Interviewer Dashboard</title>
+
+</head>
+<body>
+    <header>
+        <h1>Smart Recruitment Platform Interviewer Dashboard</h1>
+        <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+    </header>
+    
+    <section class="interview-schedule">
+        <h2>Interview Schedule</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Application ID</th>
+                    <th>Candidate Name</th>
+                    <th>Interview Date</th>
+                    <th>Interview Time</th>
+                    <th>Interviewers</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for schedule in schedules %}
+                <tr>
+                    <td>{{ schedule.application_id }}</td>
+                    <td>{{ schedule.candidate_name }}</td>
+                    <td>{{ schedule.interview_date }}</td>
+                    <td>{{ schedule.interview_time }}</td>
+                    <td>{{ schedule.interviewers }}</td>
+                    <td>
+                        <a href="{{ url_for('submit_feedback', interview_schedule_id=schedule.id) }}">Submit Feedback</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>

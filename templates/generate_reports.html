@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Greport.css') }}">
+    <title>Report</title>
+</head>
+<body>
+    <div class="container">
+        <h2>Report</h2>
+        
+        <h3>Job Postings</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Job Title</th>
+                    <th>Department</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for job in job_postings %}
+                <tr>
+                    <td>{{ job.job_title }}</td>
+                    <td>{{ job.department }}</td>
+                    <td>{{ job.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>Applications</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Candidate Name</th>
+                    <th>Job Title</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for application in applications %}
+                <tr>
+                    <td>{{ application.candidate_name }}</td>
+                    <td>{{ application.job_title }}</td>
+                    <td>{{ application.status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3>Interview Schedules</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Interview Date</th>
+                    <th>Interview Time</th>
+                    <th>Interviewers</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for schedule in interview_schedules %}
+                <tr>
+                    <td>{{ schedule.interview_date }}</td>
+                    <td>{{ schedule.interview_time }}</td>
+                    <td>{{ schedule.interviewers }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <p>
+            {% if session['role'] == 'HR Manager' %}
+                <a href="{{ url_for('hr_dashboard') }}">Back to HR Dashboard</a>
+            {% elif session['role'] == 'Admin' %}
+                <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+            {% elif session['role'] == 'Candidate' %}
+                <a href="{{ url_for('candidate_dashboard') }}">Back to Candidate Dashboard</a>
+            {% elif session['role'] == 'Interviewer' %}
+                <a href="{{ url_for('interviewer_dashboard') }}">Back to Interviewer Dashboard</a>
+            {% elif session['role'] == 'Recruiter' %}
+                <a href="{{ url_for('recruiter_dashboard') }}">Back to Recruiter Dashboard</a>
+            {% endif %}
+        </p>
+    </div>
+</body>
+</html>

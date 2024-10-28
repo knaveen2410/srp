@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+    <h1 class="Baa">Smart Recruting Platform</h1>
+    <div class="container">
+        <!-- Header Section -->
+        <header>
+            <h1>Welcome Admin</h1>
+            <p>Manage the recruitment process effectively.</p>
+        </header>
+
+        <!-- Dashboard Actions -->
+        <div class="dashboard-actions">
+            <a href="{{ url_for('view_candidates') }}" class="button">View Candidates</a>
+            <a href="{{ url_for('manage_applications') }}" class="button">Manage Applications</a>
+            <a href="{{ url_for('create_job') }}" class="button">Create Job Posting</a>
+            <a href="{{ url_for('view_jobs') }}" class="button">View Job Postings</a>
+            <a href="{{ url_for('logout') }}" class="button">Logout</a>
+        </div>
+
+        <!-- Dashboard Layout for Statistics and Job Postings -->
+        <div class="dashboard-layout">
+            <!-- Dashboard Statistics Section -->
+            <section class="statistics">
+                <h2>Dashboard Statistics</h2>
+                <div class="statistic-item">
+                    <h4>Total Job Postings</h4>
+                    <p>{{ total_jobs }}</p>
+                </div>
+                <div class="statistic-item">
+                    <h4>Total Applications</h4>
+                    <p>{{ total_applications }}</p>
+                </div>
+                <div class="statistic-item">
+                    <h4>Total Interviews Scheduled</h4>
+                    <p>{{ total_interviews }}</p>
+                </div>
+            </section>
+
+            <!-- Job Postings Section -->
+            <div class="job-postings">
+                <h2>Job Postings</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Job Title</th>
+                            <th>Department</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for job in job_postings %}
+                        <tr>
+                            <td>{{ job.job_title }}</td>
+                            <td>{{ job.department }}</td>
+                            <td>{{ job.status }}</td>
+                            <td class="action-links">
+                                <form action="{{ url_for('edit_job', job_id=job.id) }}" method="GET" style="display:inline;">
+                                    <input type="submit" value="Edit" class="btn">
+                                </form>
+                                <form action="{{ url_for('delete_job', job_id=job.id) }}" method="POST" style="display:inline;">
+                                    <input type="submit" value="Delete" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this job posting?');">
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

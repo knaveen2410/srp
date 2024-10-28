@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/candi_dash.css') }}">
+    <title>Candidate Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <h1>WELCOME TO SMART RECRUITING PLATFORM</h1>
+        
+        <div class="dashboard-layout">
+            <!-- Navigation Links on the left -->
+            <nav class="dashboard-actions">
+                <a href="{{ url_for('edit_profile') }}" class="button">Edit Profile</a>
+                <a href="{{ url_for('view_applications') }}" class="button">View My Applications</a>
+                <a href="{{ url_for('candidate_feedback')}}" class="button">Feedback or Result</a>
+                <a href="{{ url_for('logout') }}" class="button">Logout</a>
+            </nav>
+
+            <!-- Job Postings Section on the right -->
+            <div class="job-postings-section">
+                <h2>Available Job Postings</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Job Title</th>
+                            <th>Department</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for job in job_postings %}
+                        <tr>
+                            <td>{{ job.job_title }}</td>
+                            <td>{{ job.department }}</td>
+                            <td>{{ job.status }}</td>
+                            <td class="action-links">
+                                {% if session['role'] == 'Candidate' %}
+                                    {% if job.id in applied_jobs %}
+                                        <span>Applied</span>
+                                    {% else %}
+                                        <form action="{{ url_for('apply_job', job_id=job.id) }}" method="POST" style="display:inline;">
+                                            <input type="submit" value="Apply" class="btn">
+                                        </form>
+                                    {% endif %}
+                                {% elif session['role'] in ['HR Manager', 'Admin'] %}
+                                    <form action="{{ url_for('edit_job', job_id=job.id) }}" method="GET" style="display:inline;">
+                                        <input type="submit" value="Edit" class="btn">
+                                    </form>
+                                    <form action="{{ url_for('delete_job', job_id=job.id) }}" method="POST" style="display:inline;">
+                                        <input type="submit" value="Delete" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this job posting?');">
+                                    </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Upcoming Interviews Section below -->
+        <div class="upcoming-interviews">
+            <h2>Upcoming Interviews</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Candidate Name</th>
+                        <th>Interview Date</th>
+                        <th>Interview Time</th>
+                        <th>Interviewers</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for interview in interviews %}
+                    <tr>
+                        <td>{{ interview.candidate_name }}</td>
+                        <td>{{ interview.interview_date }}</td>
+                        <td>{{ interview.interview_time }}</td>
+                        <td>{{ interview.interviewers }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

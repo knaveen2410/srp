@@ -1,0 +1,168 @@
+/* hr.css */
+
+body {
+    font-family: Arial, sans-serif;
+    /* background: url('https://www.wallpapertip.com/wmimgs/66-666819_website-design-background-creative-background-image-for-website.jpg'); */
+    margin: 0;
+    background-image: #a0a0a0;
+    padding: 0;
+    color: #333;
+}
+
+header {
+    background-color: #4CAF50; /* Green accent for header */
+    color: white;
+    padding: 20px 0;
+}
+
+.header-container {
+    text-align: center;
+}
+
+.header-container h1 {
+    margin: 0;
+    font-size: 35px;
+}
+
+#current-time {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: var(--white); /* White background for container */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navigation {
+    width: 25%;
+    border-right: 1px solid #ddd;
+    padding-right: 20px;
+}
+
+.navigation ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.navigation ul li {
+    margin: 15px 0;
+}
+
+.navigation ul li a {
+    text-align: center;
+    display: inline-block;
+    margin: 5px;
+    color: #4CAF50; /* Green accent for links */
+    width: 200px;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 8px 12px;
+    border: 2px solid #4CAF50; /* Green border */
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.navigation ul li a:hover {
+    background-color: #4CAF50; /* Green background on hover */
+    color: white; /* White text on hover */
+}
+
+.section {
+    width: 75%;
+    padding-left: 20px;
+}
+
+h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+table th {
+    background-color: #4CAF50; /* Green header */
+    color: white;
+}
+
+table tr:hover {
+    background-color: rgba(240, 240, 240, 0.9); /* Light hover effect */
+}
+
+.btn-container {
+    display: flex;
+    justify-content: space-between; /* Ensures the buttons are spaced out evenly */
+    gap: 10px; /* Optional: adds space between the buttons */
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #4CAF50; /* Green button */
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    text-align: center; /* Ensures text is centered */
+    flex-grow: 1; /* Ensures the buttons take up equal width if container width allows */
+}
+
+.btn:hover {
+    background-color: #388E3C; /* Darker green on hover */
+}
+
+.statistics {
+    margin-top: 30px;
+    padding-left: 20px;
+}
+
+.statistic-item {
+    background-color: #f9f9f9; /* Light grey background for statistic items */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.statistic-item h4 {
+    margin: 0 0 10px;
+}
+
+.statistic-item p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4CAF50; /* Green for statistics text */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .navigation {
+        width: 100%;
+        border-right: none;
+        padding-right: 0;
+    }
+    .section {
+        width: 100%;
+        padding-left: 0;
+    }
+}

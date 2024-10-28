@@ -1,0 +1,20 @@
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 313-062-910
+INFO:werkzeug: * Detected change in 'C:\\Users\\kolan\\OneDrive\\Desktop\\smart-recruiting-platform\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\kolan\\OneDrive\\Desktop\\smart-recruiting-platform\\app.py', reloading
+WARNING:werkzeug: * Debugger is active!
+INFO:werkzeug: * Debugger PIN: 313-062-910
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2024 22:51:44] "GET /admin-dashboard HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2024 22:51:44] "[36mGET /static/css/admin.css HTTP/1.1[0m" 304 -
+ERROR:root:Error deleting job posting: (1054, "Unknown column 'job_posting_id' in 'where clause'")
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2024 22:51:48] "[32mPOST /delete_job/14 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2024 22:51:48] "GET /view_jobs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2024 22:51:48] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+ERROR:root:Error deleting job posting: (1054, "Unknown column 'job_posting_id' in 'where clause'")
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2024 22:51:51] "[32mPOST /delete_job/14 HTTP/1.1[0m" 302 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2024 22:51:51] "GET /view_jobs HTTP/1.1" 200 -
+INFO:werkzeug:127.0.0.1 - - [30/Sep/2024 22:51:51] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+INFO:werkzeug: * Detected change in 'C:\\Users\\kolan\\OneDrive\\Desktop\\smart-recruiting-platform\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\kolan\\OneDrive\\Desktop\\smart-recruiting-platform\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\kolan\\OneDrive\\Desktop\\smart-recruiting-platform\\app.py', reloading
+INFO:werkzeug: * Detected change in 'C:\\Users\\kolan\\OneDrive\\Desktop\\smart-recruiting-platform\\app.py', reloading

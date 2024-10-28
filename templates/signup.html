@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <title>Sign Up</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Left side for image or text -->
+        <div class="left-side">
+            <h1>Join the Smart Recruiting Platform</h1>
+            <p>Your journey begins here.</p>
+            <!-- Add your image here -->
+            <img src="https://th.bing.com/th/id/OIP.9c0H_tYXNslcts0Z3Y8swgHaD4?rs=1&pid=ImgDetMain" alt="Welcome Image" class="welcome-image">
+        </div>
+
+        <!-- Right side with signup form -->
+        <div class="right-side">
+            <h2>Create Your Account</h2>
+            <form action="{{ url_for('signup') }}" method="POST">
+                <label for="name">Name:</label>
+                <input type="text" name="name" required>
+                
+                <label for="username">Username:</label>
+                <input type="text" name="username" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" name="email" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" name="password" required>
+                
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" name="confirm_password" required>
+                
+                <label for="role">Role:</label>
+                <select name="role" required>
+                    <option value="Admin">Admin</option>
+                    <option value="HR Manager">HR Manager</option>
+                    <option value="Recruiter">Recruiter</option>
+                    <option value="Interviewer">Interviewer</option>
+                    <option value="Candidate">Candidate</option>
+                </select>
+                
+                <button type="submit">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="{{ url_for('login') }}">Log in here</a></p>
+        </div>
+    </div>
+</body>
+</html>

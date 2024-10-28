@@ -1,0 +1,210 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+    height: 100vh;
+    width: 100%;
+    background-color: #929293; /* Light background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    padding-bottom: 6px;
+    color: #333; /* Dark grey for headings */
+}
+
+.container {
+    width: 100%;
+    max-height: 100vh; 
+    padding: 95px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background: rgba(240, 240, 240, 0.95);
+    overflow-y: auto; /* Allow vertical scrolling */
+}
+
+/* Centering the title and paragraph */
+h1, p {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+h1 {
+    color: #4CAF50; /* Accent color */
+}
+
+p {
+    color: #555; /* Medium grey for contrast */
+}
+
+/* Flexbox Layout */
+.dashboard-layout {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* Navigation (left side) */
+.dashboard-actions {
+    background: #4CAF50; /* Accent color */
+    padding-top: 55px;
+    flex: 0 0 250px; /* Fixed width */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #f4f4f9; /* Light background */
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border: 1px solid #ddd; /* Light border for definition */
+}
+
+/* Links or Buttons in Navigation */
+.dashboard-actions .button {
+    background: #4CAF50; /* Accent color */
+    color: white; /* White text */
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    font-weight: bold; /* Bold text */
+}
+
+.dashboard-actions .button:hover {
+    background: #388E3C; /* Darker shade on hover */
+    transform: translateY(-2px); /* Lift effect */
+}
+
+/* Optional: Styling for Active Link/Button */
+.dashboard-actions .button.active {
+    background: #2E7D32; /* Even darker shade for active state */
+    transform: none; /* No lift effect for active state */
+}
+
+.dashboard-actions .button {
+    background: #4CAF50; /* Accent color */
+    background-color: rgba(255, 255, 255, 0.6); /* Light button with transparency */
+    color: #333; /* Dark text for contrast */
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.dashboard-actions .button:hover {
+    background: #4CAF50; /* Accent color */
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly lighter on hover */
+    transform: translateY(-2px); /* Lift effect */
+}
+
+/* Job Postings Section (right side) */
+.job-postings-section {
+    flex: 1;
+    background: rgba(240, 240, 240, 0.95); /* Slightly transparent light grey */
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.job-postings-section table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.job-postings-section th,
+.job-postings-section td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd; /* Light grey border */
+    background-color: rgba(240, 240, 240, 0.95); /* Light grey for table rows */
+}
+
+/* Table Headers */
+.job-postings-section th {
+    background-color: #4CAF50; /* Accent color for headers */
+    color: white; /* White text for visibility */
+    text-align: left;
+    border-bottom: 2px solid #388E3C; /* Darker accent for borders */
+}
+
+.job-postings-section tbody tr:nth-child(odd) {
+    background-color: rgba(240, 240, 240, 0.9); /* Slightly darker grey */
+}
+
+.job-postings-section tbody tr:hover {
+    background-color: rgba(230, 230, 230, 0.8); /* Light hover effect */
+}
+
+/* Upcoming Interviews Section (Full width below both) */
+.upcoming-interviews {
+    width: 100%;
+    background: rgba(240, 240, 240, 0.95); /* Slightly transparent light grey */
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.upcoming-interviews table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.upcoming-interviews th,
+.upcoming-interviews td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd; /* Light grey border */
+}
+
+.upcoming-interviews th {
+    background-color: #4CAF50; /* Accent color for headers */
+    color: white; /* White text for visibility */
+    text-align: left;
+    border-bottom: 2px solid #388E3C; /* Darker accent for borders */
+}
+
+.upcoming-interviews tbody tr:nth-child(odd) {
+    background-color: rgba(240, 240, 240, 0.9); /* Slightly darker grey */
+}
+
+.upcoming-interviews tbody tr:hover {
+    background-color: rgba(230, 230, 230, 0.8); /* Light hover effect */
+}
+
+/* Action Links */
+.action-links {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 15px;
+    background-color: #4CAF50; /* Accent color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #388E3C; /* Darker accent on hover */
+    transform: translateY(-2px); /* Lift effect */
+}
+
+.btn-delete {
+    background-color: #dc3545; /* Danger color */
+}
+
+.btn-delete:hover {
+    background-color: #c82333; /* Darker shade on hover */
+    transform: translateY(-2px); /* Lift effect */
+}

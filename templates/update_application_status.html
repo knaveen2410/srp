@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>Update Application Status</title>
+</head>
+<body>
+    <div class="form-container">
+        <h2>Update Application Status</h2>
+        <form method="POST" action="{{ url_for('update_application_status', application_id=application_id) }}">
+            <label>Current Status</label>
+            <input type="text" name="current_status" value="{{ current_status[0] }}" disabled>
+
+            <label>New Status</label>
+            <select name="status" required>
+                <option value="" disabled selected>Select new status</option>
+                <option value="Under Review">Under Review</option>
+                <option value="Interview Scheduled">Interview Scheduled</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Offer Made">Offer Made</option>
+                <option value="Hired">Hired</option>
+            </select>
+
+            <input type="submit" value="Update Status">
+        </form>
+        <p><a href="{{ url_for('manage_applications') }}">Back to Manage Applications</a></p>
+    </div>
+</body>
+</html>
