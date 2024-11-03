@@ -1,210 +1,443 @@
-/* Global Styles */
-* {
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fb;
+    color: #333;
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
 }
-
-html, body {
-    height: 100vh;
-    width: 100%;
-    background-color: #929293; /* Light background */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.brand-logo img {
+    width: 80px;
+    margin-bottom: 10px;
 }
-
-h2 {
-    padding-bottom: 6px;
-    color: #333; /* Dark grey for headings */
-}
-
-.container {
-    width: 100%;
-    max-height: 100vh; 
-    padding: 95px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    background: rgba(240, 240, 240, 0.95);
-    overflow-y: auto; /* Allow vertical scrolling */
-}
-
-/* Centering the title and paragraph */
-h1, p {
-    text-align: center;
-    margin-bottom: 45px;
-}
-
-h1 {
-    color: #4CAF50; /* Accent color */
-}
-
-p {
-    color: #555; /* Medium grey for contrast */
-}
-
-/* Flexbox Layout */
-.dashboard-layout {
-    display: flex;
-    justify-content: space-between;
-    gap: 30px;
-    margin-bottom: 40px;
-}
-
-/* Navigation (left side) */
-.dashboard-actions {
-    background: #4CAF50; /* Accent color */
-    padding-top: 55px;
-    flex: 0 0 250px; /* Fixed width */
+.sidebar {
+    width: 250px;
+    background-color: #273be2;
+    color: #fff;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    background-color: #f4f4f9; /* Light background */
+    align-items: center;
     padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-    border: 1px solid #ddd; /* Light border for definition */
+    position: fixed; /* Fixed position */
+    top: 0;
+    bottom: 0;
+    left: 0;
+    height: 100vh;
 }
 
-/* Links or Buttons in Navigation */
-.dashboard-actions .button {
-    background: #4CAF50; /* Accent color */
-    color: white; /* White text */
-    padding: 12px;
-    border-radius: 8px;
-    text-align: center;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-weight: bold; /* Bold text */
-}
-
-.dashboard-actions .button:hover {
-    background: #388E3C; /* Darker shade on hover */
-    transform: translateY(-2px); /* Lift effect */
-}
-
-/* Optional: Styling for Active Link/Button */
-.dashboard-actions .button.active {
-    background: #2E7D32; /* Even darker shade for active state */
-    transform: none; /* No lift effect for active state */
-}
-
-.dashboard-actions .button {
-    background: #4CAF50; /* Accent color */
-    background-color: rgba(255, 255, 255, 0.6); /* Light button with transparency */
-    color: #333; /* Dark text for contrast */
-    padding: 12px;
-    border-radius: 8px;
-    text-align: center;
-    text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.dashboard-actions .button:hover {
-    background: #4CAF50; /* Accent color */
-    background-color: rgba(255, 255, 255, 0.8); /* Slightly lighter on hover */
-    transform: translateY(-2px); /* Lift effect */
-}
-
-/* Job Postings Section (right side) */
-.job-postings-section {
-    flex: 1;
-    background: rgba(240, 240, 240, 0.95); /* Slightly transparent light grey */
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.job-postings-section table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.job-postings-section th,
-.job-postings-section td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd; /* Light grey border */
-    background-color: rgba(240, 240, 240, 0.95); /* Light grey for table rows */
-}
-
-/* Table Headers */
-.job-postings-section th {
-    background-color: #4CAF50; /* Accent color for headers */
-    color: white; /* White text for visibility */
-    text-align: left;
-    border-bottom: 2px solid #388E3C; /* Darker accent for borders */
-}
-
-.job-postings-section tbody tr:nth-child(odd) {
-    background-color: rgba(240, 240, 240, 0.9); /* Slightly darker grey */
-}
-
-.job-postings-section tbody tr:hover {
-    background-color: rgba(230, 230, 230, 0.8); /* Light hover effect */
-}
-
-/* Upcoming Interviews Section (Full width below both) */
-.upcoming-interviews {
-    width: 100%;
-    background: rgba(240, 240, 240, 0.95); /* Slightly transparent light grey */
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-.upcoming-interviews table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.upcoming-interviews th,
-.upcoming-interviews td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd; /* Light grey border */
-}
-
-.upcoming-interviews th {
-    background-color: #4CAF50; /* Accent color for headers */
-    color: white; /* White text for visibility */
-    text-align: left;
-    border-bottom: 2px solid #388E3C; /* Darker accent for borders */
-}
-
-.upcoming-interviews tbody tr:nth-child(odd) {
-    background-color: rgba(240, 240, 240, 0.9); /* Slightly darker grey */
-}
-
-.upcoming-interviews tbody tr:hover {
-    background-color: rgba(230, 230, 230, 0.8); /* Light hover effect */
-}
-
-/* Action Links */
-.action-links {
+.dashboard-actions {
     display: flex;
-    gap: 10px;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
 }
 
-.btn {
-    padding: 10px 15px;
-    background-color: #4CAF50; /* Accent color */
-    color: white;
-    border: none;
+.dashboard-actions a {
+    padding: 10px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 5px;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+
+/* Dashboard Container */
+.dashboard-container {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+}
+
+/* Main Content Area */
+.main-content {
+    margin-left: 280px;
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* Horizontal Navigation Bar */
+.nav-bar {
+    background-color: #273be2;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px 0;
+    position: sticky;
+    margin: 0;
+    
+
+}
+
+.nav-bar .nav-link {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    padding: 10px 15px;
+    transition: color 0.3s, background-color 0.3s;
+}
+
+.nav-bar .nav-link:hover {
+    background-color: #f8f9fb;
+    color: #273be2;
+    border-radius: 5px;
+}
+
+/* Section Container */
+.sections-container {
+    scroll-behavior: smooth;
+    display: flex;
+    flex-direction: column;
+}
+#job-postings{
+    background: url('https://img.freepik.com/premium-photo/man-holding-wooden-cubes-jobs-text_218381-4505.jpg?ga=GA1.1.1004549663.1730185390&semt=ais_hybrid');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#my-applications{
+    background: url('https://wallpaperaccess.com/full/358921.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#upcoming-interviews{
+    background: url('https://img.freepik.com/premium-photo/two-empty-white-chairs-against-gray-wall_77190-24580.jpg?ga=GA1.1.1004549663.1730185390&semt=ais_hybrid');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+/* Individual Section Styling */
+.section-container {
+    min-height: 100vh;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    background-color: #f8f9fb;
+    overflow-y: auto;
+}
+
+/* Card Container */
+/* Card Container */
+.card-container {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr); /* Three columns */
+    justify-items: center;
+    width: 100%;
+}
+
+/* Card Styling */
+.card {
+    /* background-color: #fff; */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 85%; /* Full width within the grid cell */
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: rgba(208,218,235,0.4);
+-webkit-backdrop-filter: blur(12px);
+backdrop-filter: blur(12px);
+border: 1px solid rgba(208,218,235,0.2);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card h3 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    margin: 5px 0;
+    color: #666;
+}
+
+
+/* Button Styling */
+.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #273be2;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 10px;
+    transition: background-color 0.3s;
 }
 
 .btn:hover {
-    background-color: #388E3C; /* Darker accent on hover */
-    transform: translateY(-2px); /* Lift effect */
+    background-color: #1a2dbb;
 }
 
 .btn-delete {
-    background-color: #dc3545; /* Danger color */
+    background-color: #e74c3c;
 }
 
 .btn-delete:hover {
-    background-color: #c82333; /* Darker shade on hover */
-    transform: translateY(-2px); /* Lift effect */
+    background-color: #c0392b;
+}
+
+/* Modal Styles */
+#resumeModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background: #fff;
+    width: 80%;
+    max-width: 700px;
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    cursor: pointer;
+}
+.sections-container h2{
+    font-size: 2.5em;
+    color: #273BE2;
+    border-bottom: 2px solid #273BE2;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+.sections-container h3{
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #273be2;
+}
+/* General Footer Styles */
+.footer {
+    background-color: #282c34; /* Dark background */
+    color: #ffffff; /* White text */
+    padding: 40px 20px; /* Padding for top and bottom, and side */
+    display: flex;
+    flex-direction: column; /* Stack sections vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    margin-left: 280px;
+}
+.footer h1{
+    padding: 15px 15px;
+    color: #273BE2;
+}
+
+/* Footer Content */
+.footer-content {
+    max-width: 1200px; /* Max width for content */
+    width: 100%; /* Full width */
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping of sections */
+    justify-content: space-between; /* Space between sections */
+}
+
+/* Footer Sections */
+.footer-section {
+    flex: 1 1 calc(33.333% - 20px); /* Each section takes 1/3 of the row with space */
+    margin: 10px; /* Margin around each section */
+    min-width: 290px; /* Minimum width for smaller screens */
+    box-sizing: border-box; /* Ensure padding is included in width calculations */
+}
+
+/* Headings */
+.footer-section h3 {
+    display: flex; /* Flex for icon and text alignment */
+    align-items: center; /* Center the icon and text */
+    font-size: 20px; /* Font size for headings */
+    margin-bottom: 10px; /* Margin below headings */
+}
+
+/* Icons */
+.footer-section h3 i {
+    margin-right: 10px; /* Space between icon and text */
+    color: #273BE2; /* Change icon color */
+    font-size: 24px; /* Icon size */
+}
+
+/* Links */
+.footer-section a {
+    color: #ffffff; /* Link color */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Block display for better spacing */
+    margin: 5px 0; /* Margin for links */
+}
+
+.footer-section a:hover {
+    color: #273BE2; /* Change color on hover */
+}
+
+/* Newsletter Form */
+.newsletter form {
+    display: flex; /* Flex for form elements */
+    margin-top: 10px; /* Margin on top of the form */
+}
+
+.newsletter input[type="email"] {
+    padding: 10px; /* Padding for input */
+    border: none; /* Remove border */
+    border-radius: 5px 0 0 5px; /* Rounded corners for left side */
+    flex: 1; /* Input takes full width */
+}
+
+.newsletter button {
+    padding: 10px; /* Padding for button */
+    border: none; /* Remove border */
+    background-color: #273BE2; /* Button background color */
+    color: #ffffff; /* Button text color */
+    border-radius: 0 5px 5px 0; /* Rounded corners for right side */
+    cursor: pointer; /* Cursor style */
+}
+
+.newsletter button:hover {
+    background-color: #273BE2; /* Darker blue on hover */
+}
+
+/* Copyright */
+.copyright {
+    text-align: center; /* Center text */
+    margin-top: 20px; /* Margin above copyright */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Stack sections vertically on smaller screens */
+        align-items: center; /* Center items */
+    }
+}
+  /* Popup chat styles */
+  .chat-popup {
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    width: 300px;
+    display: none;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.chat-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+}
+
+.close-btn {
+    font-size: 18px;
+    cursor: pointer;
+    color: white;
+    background: transparent;
+    border: none;
+}
+
+.chat-container {
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.user-message, .bot-message {
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.user-message {
+    background-color: #d1e7dd;
+    text-align: right;
+}
+
+.bot-message {
+    background-color: #f8d7da;
+}
+
+/* Minimized chat button */
+.chat-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* Container for input and button */
+.input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Style for the text input */
+#user-input {
+    flex: 1;  /* Take up remaining space */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s;
+    margin: 5px;
+}
+
+#user-input:focus {
+    border-color: #007bff;
+    margin: 5px;
+}
+
+/* Style for the send button */
+button[onclick="sendMessage()"] {
+    padding: 10px 15px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-left: 8px;  /* Space between input and button */
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+button[onclick="sendMessage()"]:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }

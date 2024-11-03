@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match Candidates</title>
+</head>
+<body>
+    <h1>Match Candidates</h1>
+    <form id="matchForm">
+        <textarea name="job_description" placeholder="Enter Job Description" required></textarea>
+        <textarea name="candidate_profiles" placeholder="Enter Candidate Profiles" required></textarea>
+        <button type="submit">Match Candidates</button>
+    </form>
+    <div id="matchedCandidates"></div>
+    <script>
+        document.getElementById('matchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            fetch('/match_candidates', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('matchedCandidates').innerText = JSON.stringify(data);
+            });
+        });
+    </script>
+</body>
+</html>

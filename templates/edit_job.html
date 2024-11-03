@@ -26,7 +26,7 @@ body {
 /* Title */
 h2 {
     text-align: center;
-    color: #007bff;
+    color: #273BE2;
     font-size: 30px;
     font-weight: 600;
     margin-bottom: 20px;
@@ -51,7 +51,7 @@ h2 {
 label {
     font-weight: 500;
     margin-bottom: 5px;
-    color: black;
+    color: #273BE2;
 }
 
 /* Input and Textarea fields */
@@ -72,7 +72,7 @@ input[type="text"]:focus,
 input[type="date"]:focus,
 textarea:focus,
 select:focus {
-    border-color: #007bff;
+    border-color: #273BE2;
     outline: none;
     background-color: #fff;
 }
@@ -90,7 +90,7 @@ textarea {
 }
 
 input[type="submit"] {
-    background-color: #007bff;
+    background-color: #273BE2;
     color: white;
     padding: 12px 30px;
     font-size: 18px;
@@ -109,19 +109,22 @@ input[type="submit"]:active {
 }
 
 /* Link styling */
-p {
-    text-align: center;
-    margin-top: 20px;
-}
-
-a {
-    color: #007bff;
-    font-weight: 600;
+p a {
+    display: inline-block;
+    color: #273BE2;
+    font-weight: bold;
     text-decoration: none;
+    border: 1px solid #273BE2;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    margin-top: 15px;
+    
 }
 
-a:hover {
-    text-decoration: underline;
+p a:hover {
+    background-color: #273BE2;
+    color: #ffffff;
 }
 
 /* Responsive Design */
@@ -194,7 +197,6 @@ a:hover {
                 <input type="submit" name="action" value="Update Job">
             </div>
         </form>
-        <p><a href="{{ url_for('view_jobs') }}">Back to Job Postings</a></p>
         <p>
             {% if session['role'] == 'HR Manager' %}
                 <a href="{{ url_for('hr_dashboard') }}">Back to HR Dashboard</a>

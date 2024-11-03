@@ -10,26 +10,82 @@
     <div class="container">
         <!-- Left side for image or text -->
         <div class="left-side">
-            <h1>Smart recruiting Platform</h1>
+            <h1>Smart Recruiting Platform</h1>
             <p>Your journey begins here.</p>
             <!-- Add your image here -->
             <img src="https://th.bing.com/th/id/OIP.9c0H_tYXNslcts0Z3Y8swgHaD4?rs=1&pid=ImgDetMain" alt="Welcome Image" class="welcome-image">
         </div>
-
+        
         <!-- Right side with login form -->
         <div class="right-side">
+            
+                
             <h2>Login to Dashboard</h2>
             <form action="{{ url_for('login') }}" method="POST">
                 <label for="email">Email:</label>
-                <input type="email" name="email" required>
+                <input type="email" name="email" required placeholder="Enter your email">
                 
                 <label for="password">Password:</label>
-                <input type="password" name="password" required>
+                <input type="password" name="password" required placeholder="Enter your password">
                 
-                <button type="submit">Login</button>
+                <button type="submit" class="btn">Login</button>
             </form>
             <p>Don't have an account? <a href="{{ url_for('signup') }}">Sign up here</a></p>
         </div>
     </div>
+    <!-- Popup Chat Window -->
+    <div id="chatPopup" class="chat-popup">
+        <div class="chat-popup-header">
+            <span>Chat with Us</span>
+            <button class="close-btn" onclick="toggleChat(event)">✖</button>
+        </div>
+        <div class="chat-container" id="chat-box"></div>
+        <!-- Wrap input and button in a container -->
+<div class="input-container">
+    <input type="text" id="user-input" placeholder="Type a message">
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+    </div>
+
+    <!-- Minimized Chat Button -->
+    <button class="chat-btn" id="chatBtn" onclick="toggleChat()">💬</button>
+
+    <script>
+        // Toggle the visibility of the chat popup
+        function toggleChat(event) {
+            if (event) event.stopPropagation(); // Prevent event bubbling on close button
+
+            const chatPopup = document.getElementById("chatPopup");
+            const chatBtn = document.getElementById("chatBtn");
+
+            // Open or close the chat based on current state
+            if (chatPopup.style.display === "flex") {
+                chatPopup.style.display = "none"; // Close the chat
+                chatBtn.style.display = "flex";    // Show the chat button
+            } else {
+                chatPopup.style.display = "flex";  // Open the chat
+                chatBtn.style.display = "none";    // Hide the chat button
+            }
+        }
+
+        // Send message to backend and display in chat
+        async function sendMessage() {
+            const userInput = document.getElementById("user-input").value;
+            document.getElementById("user-input").value = "";
+
+            const chatBox = document.getElementById("chat-box");
+            chatBox.innerHTML += `<div class="user-message">${userInput}</div>`;
+
+            const response = await fetch("/get_reply", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({ message: userInput })
+            });
+            const data = await response.json();
+
+            chatBox.innerHTML += `<div class="bot-message">${data.reply}</div>`;
+        }
+    </script>
 </body>
 </html>

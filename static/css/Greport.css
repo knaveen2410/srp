@@ -1,86 +1,155 @@
-/* style.css */
-
+/* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
-    /* background: url('https://www.wallpapertip.com/wmimgs/66-666819_website-design-background-creative-background-image-for-website.jpg'); */
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    background-color: #f4f4f4;
 }
 
 .container {
-    max-width: 900px;
-    margin: auto;
-    background: var(--white); /* White background for the container */
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 }
 
-.container:hover {
-    transform: translateY(-5px);
+.left-column {
+    flex: 1;
+}
+.left-column h1{
+    align-items: center;
+    justify-content: center;
 }
 
-h2 {
-    text-align: center;
-    color: #333;
+.group {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
-    font-size: 2.5em;
 }
 
-h3 {
-    margin-top: 30px;
-    color: #444;
-    font-size: 1.8em;
-    border-bottom: 2px solid #4CAF50; /* Green accent for subheadings */
-    padding-bottom: 5px;
+.group-item {
+    flex: 1;
+    margin: 0 10px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+.left-column h1{
+    padding-left: 37%;
+}
+.left-column h1,.group-item h2,.remain h2{
+    color: #273BE2;
+    border-bottom: 2px solid #273BE2;
+}
+.group-item table{
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+
 }
 
 table {
-    width: 100%;
+    width: 50%;
     border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 1.1em;
+    width: 100%; /* Full width of grid column */
+    margin-bottom: 20px;
 }
 
 th, td {
-    padding: 15px;
+    padding: 8px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border: 1px solid #ddd;
 }
 
 th {
-    background-color: #4CAF50; /* Green header */
+    background-color: #273BE2; /* Dark blue for table headers */
     color: white;
-    font-weight: bold;
 }
 
-td {
+.remain{
+    display: grid; /* Use CSS Grid for layout */
+    grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+    gap: 10px; /* Space between tables */
+}
+
+
+
+.right-column {
+    width: 30%; /* Fixed width for the right column */
+    padding: 20px;
+    position: fixed; /* Keep it fixed while scrolling */
+    right: 0; /* Align to the right */
+    top: 0; /* Start from the top */
+    height: 100vh; /* Full height */
+    overflow-y: auto; /* Allow scrolling if needed */
+    background-color: #e8f5e9; /* Different background color for visual separation */
+}
+
+/* Headings */
+h1, h2 {
+    color: #2c3e50;
+}
+
+
+
+tr:nth-child(even) {
     background-color: #f9f9f9;
-    transition: background-color 0.3s;
 }
 
-td:hover {
-    background-color: #eaeaea; /* Light grey on hover */
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack columns on smaller screens */
+    }
+    
+    .left-column, .right-column {
+        width: 100%; /* Full width for smaller screens */
+        position: static; /* Remove fixed positioning */
+    }
+
+    .right-column {
+        height: auto; /* Remove fixed height */
+    }
 }
 
-tr:nth-child(even) td {
-    background-color: #f2f2f2; /* Light grey for even rows */
+#downloadImage {
+    background-color: #273BE2; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding for size */
+    font-size: 16px; /* Font size */
+    border: none; /* Remove default border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth hover transition */
+    margin-bottom: 10px; /* Space below the button */
+    width: 100%;
 }
 
-a {
-    display: inline-block;
-    margin-top: 20px;
-    color: #4CAF50; /* Green for links */
-    text-decoration: none;
-    font-weight: bold;
-    padding: 10px 15px;
-    border: 2px solid #4CAF50; /* Green border */
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+#downloadImage:hover {
+    background-color: #273BE2; /* Darker green on hover */
 }
 
-a:hover {
-    background-color: #4CAF50; /* Green background on hover */
+.group-item p{
+    font-size: 1.5rem;
+}
+/* Styling for the back to dashboard link */
+p{
+    padding-left: 45%;
+}
+p a {
+    color: #273BE2; /* Standard blue link color */
+    font-size: 16px; /* Font size */
+    font-weight: bold; /* Bold text for emphasis */
+    text-decoration: none; /* Remove underline */
+    padding: 8px 12px; /* Padding for size */
+    border: 1px solid #273BE2; /* Border for link */
+    border-radius: 5px; /* Rounded corners */
+    transition: color 0.3s, background-color 0.3s; /* Smooth color transition */
+    
+}
+
+p a:hover {
     color: white; /* White text on hover */
+    background-color: #273BE2; /* Blue background on hover */
 }

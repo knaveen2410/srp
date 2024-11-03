@@ -9,17 +9,35 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
-    background-color: #f8f8f8;
-     background-repeat: no-repeat;
+    background-color: #273BE2;
+    background-repeat: no-repeat;
     background-size: cover;
 }
 
-p a{
-    color: #4CAF50;
+p a {
+    display: inline-block;
+    color: #273BE2;
+    font-weight: bold;
+    text-decoration: none;
+    border: 1px solid #273BE2;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    margin-top: 15px;
+    
 }
-p a:hover{
-    text-decoration: underline;
-    color: #4CAF50;
+
+p a:hover {
+    background-color: #273BE2;
+    color: #ffffff;
+}
+.job-description h2, .application-form h2{
+    color: #273BE2;
+}
+
+.application-form p{
+    margin-top: 10px;
+    padding-left: 50%;
 }
 
 /* Container to hold job description and application form */
@@ -29,9 +47,10 @@ p a:hover{
     max-width: 1200px;
     margin: 20px auto; /* Center the container */
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.4);
+    background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    opacity: 10px;
 
 }
 
@@ -81,7 +100,7 @@ input[type="file"] {
 /* Submit button styling */
 input[type="submit"] {
     padding: 10px;
-    background-color: #4CAF50; /* Green background */
+    background-color: #273BE2; /* Green background */
     color: white; /* White text */
     border: none; /* No border */
     border-radius: 4px; /* Rounded corners */
@@ -90,7 +109,7 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: #4CAF50; /* Darker green on hover */
+    background-color: #273BE2; /* Darker green on hover */
 }
 
 /* Responsive styling */

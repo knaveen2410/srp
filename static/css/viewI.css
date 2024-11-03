@@ -1,80 +1,180 @@
-body {
-    font-family: 'Arial', sans-serif;
-    /* background: url('https://www.wallpapertip.com/wmimgs/66-666819_website-design-background-creative-background-image-for-website.jpg'); */
+/* Reset and Base Styles */
+* {
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-.container {
-    max-width: 900px;
-    margin: auto;
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-}
-
-.container:hover {
-    transform: translateY(-5px);
-}
-
-h2 {
-    text-align: center;
+body {
+    background-color: #f5f7fa;
     color: #333;
+    display: flex;
+    justify-content: center;
+}
+
+/* Main Container Layout */
+.container {
+    display: flex;
+    width: 120%;
+    margin: 0 auto;
+}
+
+/* Left Column - 60% */
+.left-column {
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #ffffff;
+    width: 60%;
+}
+
+/* Title */
+.left-column h2 {
+    font-size: 1.8rem;
+    color: #273BE2;
     margin-bottom: 20px;
-    font-size: 2.5em;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 1.1em;
-}
-
-th, td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #4CAF50; /* Primary color for the header */
-    color: white;
     font-weight: bold;
-}
-
-td {
-    background-color: #f9f9f9;
-    transition: background-color 0.3s;
-}
-
-td:hover {
-    background-color: #eaeaea;
-}
-
-tr:nth-child(even) td {
-    background-color: #f2f2f2;
-}
-
-a {
-    display: inline-block;
-    margin: 5px;
-    color: #4CAF50; /* Primary color for links */
-    text-decoration: none;
-    font-weight: bold;
-    padding: 8px 12px;
-    border: 2px solid #4CAF50; /* Primary color for link border */
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-a:hover {
-    background-color: #4CAF50; /* Primary color for hover state */
-    color: white;
-}
-
-p {
     text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #273BE2;
+}
+
+/* Back Link */
+.back-link {
+    text-align: center;
+    margin: 20px 0;
+}
+p a {
+    display: inline-block;
+    color: #273BE2;
+    font-weight: bold;
+    text-decoration: none;
+    border: 1px solid #273BE2;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    margin-top: 15px;
+    
+}
+
+p a:hover {
+    background-color: #273BE2;
+    color: #ffffff;
+}
+/* Section Styles */
+.interviews-section {
+    background-color: #f4f6f9; /* Light background for the section */
+    border-radius: 8px; /* Rounded corners */
+    padding: 30px; /* Increased padding for a spacious feel */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Deeper shadow for more depth */
+    margin-bottom: 20px; /* Space below the section */
+}
+
+/* Section Heading */
+.interviews-section h2 {
+    margin-bottom: 20px; /* Space below heading */
+    font-size: 28px; /* Increased font size for heading */
+    color: #333; /* Dark color for heading */
+    text-align: center; /* Center align heading */
+}
+
+/* Card Container */
+.card-container {
+    display: flex; /* Flexbox for card layout */
+    flex-wrap: wrap; /* Allow wrapping of cards */
+    gap: 20px; /* Space between cards */
+}
+
+/* Interview Card Styles */
+.interview-card {
+    background-color: #fff; /* White background for cards */
+    border: 1px solid #ddd; /* Light border for cards */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding inside cards */
+    width: calc(48% - 10px); /* Two cards per row with space */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow for card */
+    transition: transform 0.2s, box-shadow 0.2s; /* Animation for hover effect */
+}
+.interview-card h3{
+    color: #273BE2;
+}
+
+.interview-card:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+/* Card Content Styles */
+.card-content {
+    margin-bottom: 15px; /* Space below card content */
+}
+
+/* Highlighting Important Information */
+.card-content p {
+    margin: 5px 0; /* Minimal space between text lines */
+    line-height: 1.5; /* Increased line height for readability */
+}
+
+/* Action Links Container */
+.action-links {
+    display: flex; /* Flexbox for action links */
+    justify-content: space-between; /* Space between buttons */
+    margin-top: 15px; /* Space above action links */
+}
+
+/* Button Styles */
+.btn {
+    background-color: #273BE2; /* Blue background for buttons */
+    color: white; /* Button text color */
+    padding: 12px 18px; /* Button padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s, transform 0.2s; /* Transition for hover effect */
+    font-size: 14px; /* Font size for button text */
+}
+
+.btn:hover {
+    background-color: #273BE2; /* Darker blue on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+/* Delete Button Specific Styles */
+.btn-delete {
+    background-color: #ff4d4d; /* Red background for delete button */
+}
+
+.btn-delete:hover {
+    background-color: #e60000; /* Darker red on hover */
+}
+
+/* No Records Message */
+.no-records {
+    color: #888; /* Gray color for no records message */
+    font-style: italic; /* Italic style */
+    margin-top: 20px; /* Space above */
+    text-align: center; /* Center align */
+}
+
+
+
+/* Right Column - 40%, Fixed */
+.right-column {
+    width: 33%;
+    background-color: #f5f7fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: 0;
+    top: 0;
+    height: 100vh;
+}
+
+/* Image Styling */
+.right-column img {
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
 }

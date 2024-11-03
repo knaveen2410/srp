@@ -3,23 +3,183 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/rec.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Recruiter Dashboard</title>
 </head>
 <body>
-    <div class="container">
-        <h2>Recruiter Dashboard</h2>
-        <p>Welcome, {{ session['role'] }}!</p>
-        
-        <div class="dashboard-links">
-            <h3>Available Actions</h3>
-            <ul>
-                <li><a href="{{ url_for('view_candidates') }}" class="button">View Candidates</a></li>
-                <li><a href="{{ url_for('view_jobs') }}" class="button">View Job Postings</a></li>
-                <li><a href="{{ url_for('manage_applications') }}" class="button">Manage Applications</a></li>
-                <li><a href="{{ url_for('logout') }}" class="button">Logout</a></li>
-            </ul>
-        </div>
+    <div class="dashboard-container">
+        <!-- Sidebar Section with Brand Logo -->
+        <aside class="sidebar">
+            <div class="brand-logo">
+                <img src="https://th.bing.com/th/id/OIP.w1iz5yi0zSryHoiEhLNeRgHaHa?w=170&h=180&c=7&r=0&o=5&pid=1.7" alt="Brand Logo">
+                <h2>Recruiter Panel</h2>
+                <h2>Welcome, {{ username }}</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="{{ url_for('view_candidates') }}">View Candidates</a>
+                <a href="{{ url_for('create_job') }}">Create Job Posting</a>
+                <a href="{{ url_for('view_interviews') }}" class="button">Delete or Reschedule</a>
+                <a href="/upload" class="button">Resume Parser</a>
+                <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+            </nav>
+        </aside>
+
+        <!-- Main Dashboard Content Area -->
+        <main class="main-content">
+            <header class="header">
+                <h2>Manage Recruitment Effectively</h2>
+                <a href="#Interviews">Interviews</a>
+                <a href="#Metrics">Recruitment Metrics</a>
+                <a href="#JobPostings">Job Postings</a>
+                <a href="#Applications">Applications</a>
+            </header>
+
+            <!-- Welcome and Recruitment Metrics -->
+            <section id="Metrics" class="section metrics-section">
+                <div class="metrics-card-container">
+                    <div class="card metrics-card">
+                        <h2>Recruitment Metrics</h2>
+                        <p><strong>Total Job Openings:</strong> {{ total_job_openings }}</p>
+                        <p><strong>Total Applications:</strong> {{ total_applications }}</p>
+                        <p><strong>Total Interviews Scheduled:</strong> {{ total_interviews }}</p>
+                    </div>
+                    <div class="card metrics-card">
+                        <h2>Applications by Status</h2>
+                        {% for status in applications_by_status %}
+                            <h3>{{ status['status'] }}</h3>
+                            <p>{{ status['count'] }} applications</p>
+                        {% endfor %}
+                    </div>
+                    <div class="card metrics-card">
+                        <h2>Applications by Job Posting</h2>
+                        {% for job in applications_by_job %}
+                            <h3>{{ job['job_title'] }}</h3>
+                            <p>{{ job['application_count'] }} applications</p>
+                        {% endfor %}
+                    </div>
+                    <div class="card metrics-card">
+                        <h2>Candidate Evaluation Status</h2>
+                        {% for eval in candidate_evaluation_status %}
+                            <h3>{{ eval['selection_status'] }}</h3>
+                            <p>{{ eval['count'] }} candidates</p>
+                        {% endfor %}
+                    </div>
+                    <div class="card metrics-card">
+                        <h2>Selected Candidates</h2>
+                        {% for candidate in selected_candidates %}
+                            <h3>Candidate</h3>
+                            <p>{{ candidate['candidate_name'] }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="card metrics-card">
+                        <h2>Offers Made</h2>
+                        <p>This section displays the total number of candidates who have received a job offer. It reflects the effectiveness of our interview process and the selection criteria used. Each offer represents a successful match between candidate skills and job requirements. Analyzing this data helps us refine our hiring strategies. Ultimately, it’s about securing the best talent for our team!</p>
+                        <p>{{ offers_made }}</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interviews Section -->
+            <section id="Interviews" class="section">
+                <h2>Interviews</h2>
+                <div class="card-container">
+                    {% for interview in interviews %}
+                        <div class="card interview-card">
+                            <h3>{{ interview['job_title'] }}</h3>
+                            <p><strong>Candidate:</strong> {{ interview['candidate_name'] }}</p>
+                            <p><strong>Interview Date:</strong> {{ interview['interview_date'] }}</p>
+                            <p><strong>Interviewers:</strong> {{ interview['interviewer_names'] }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- Job Postings Section -->
+            <section id="JobPostings" class="section job-postings-section">
+                <h2>Job Postings</h2>
+                <div class="job-card-container">
+                    {% for job in job_postings %}
+                        <div class="job-card">
+                            <div class="job-header">
+                                <h3>{{ job['job_title'] }}</h3>
+                            </div>
+                            <div class="job-details">
+                                <p><strong>Description:</strong> {{ job['job_description'] }}</p>
+                                <p><strong>Department:</strong> {{ job['department'] }}</p>
+                                <p><strong>Location:</strong> {{ job['job_location'] }}</p>
+                            </div>
+                            <div class="job-footer">
+                                <button class="apply-button">Edit Job</button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+
+            <!-- Applications Section -->
+            <section id="Applications" class="section">
+                <h2>Applications</h2>
+                <div class="card-container">
+                    {% for app in applications %}
+                        <div class="card application-card">
+                            <h3>{{ app['candidate_name'] }}</h3>
+                            <p><strong>Date of Birth:</strong> {{ app['dob'] }}</p>
+                            <p><strong>Job Title:</strong> {{ app['job_title'] }}</p>
+                            <p><strong>Resume:</strong> {{ app['resume'] }}</p>
+                            <p><strong>Date Applied:</strong> {{ address }}</p>
+                            </form>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        </main>
     </div>
+
+    <footer class="footer">
+        <h1>Smart Recruiting Platform</h1>
+        <div class="footer-content">
+            <div class="footer-section contact-info">
+                <h3><i class="fas fa-envelope"></i> Contact Us</h3>
+                <p>Email: <a href="mailto:smartrecruting@gmail.com">smartrecruting@gmail.com</a></p>
+                <p>Phone: <a href="tel:+9194939798440">+91 949397 98440</a></p>
+                <p>No.42, Avadi-Vel Tech Road, Vel Nagar, Avadi, Chennai – 600 062, Tamil Nadu, India.</p>
+            </div>
+            <div class="footer-section social-media">
+                <h3><i class="fab fa-facebook-f"></i> Follow Us</h3>
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+            
+            <div class="footer-section newsletter">
+                <h3><i class="fas fa-paper-plane"></i> Subscribe to Our Newsletter</h3>
+                <p>Stay updated with the latest news and offers. Enter your email below:</p>
+                <form action="#" method="post">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <div class="footer-section additional-content">
+                <h3><i class="fas fa-info-circle"></i> About Us</h3>
+                <p>We are committed to providing the best service. Our team is dedicated to meeting your needs.</p>
+            </div>
+            <div class="footer-section faq">
+                <h3><i class="fas fa-question-circle"></i> Frequently Asked Questions</h3>
+                <ul>
+                    <li><a href="#faq1">What services do you offer?</a></li>
+                    <li><a href="#faq2">How can I contact support?</a></li>
+                    <li><a href="#faq3">Where are you located?</a></li>
+                    <li><a href="#faq4">Do you offer refunds?</a></li>
+                </ul>
+            </div>
+            <div class="footer-section copyright">
+                <p>&copy; 2024 Smart Recruiting Platform. All Rights Reserved.</p>
+            </div>
+
+
+        </div>
+    </footer>
 </body>
 </html>

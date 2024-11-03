@@ -5,6 +5,146 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Edit Interview</title>
+    <!-- Include Select2 CSS -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" rel="stylesheet" />
+
+<!-- Include jQuery (required for Select2) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Include Select2 JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js"></script>
+
+    <style>
+        body{
+            
+    background-image: linear-gradient(315deg, rgba(39, 59, 226, 0.48) 11%, #fff 79%);
+    background-repeat:no-repeat;
+    background-size:cover;
+    height:100vh;
+        }
+
+        /* Center the form container */
+.form-container {
+
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+/* Form title */
+.form-container h2 {
+    color:#273BE2;
+    text-align: center;
+}
+
+/* Labels for form fields */
+.form-container label {
+    font-weight: bold;
+    margin-top: 15px;
+    display: block;
+    color:#273BE2;
+}
+
+/* Input fields styling */
+.form-container input[type="date"],
+.form-container input[type="time"],
+.form-container select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+/* Multiple select dropdown styling */
+.form-container select[multiple] {
+    height: auto;
+    min-height: 120px; /* Increases minimum height for readability */
+    overflow-y: auto;
+    padding: 8px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Style each option */
+.form-container select option {
+    padding: 8px;
+    font-size: 14px;
+}
+
+/* Selected options styling */
+.form-container select option:checked {
+    background-color: #273BE2;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Submit button styling */
+.form-container input[type="submit"] {
+    width: 100%;
+    background-color: #273BE2;
+    color: white;
+    margin-top:10px;
+    padding: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+/* Link styling */
+.form-container a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #273BE2;
+    text-decoration: none;
+}
+p a {
+    display: inline-block;
+    color: #273BE2;
+    font-weight: bold;
+    text-decoration: none;
+    border: 1px solid #273BE2;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    margin-top: 15px;
+    
+}
+
+p a:hover {
+    background-color: #273BE2;
+    color: #ffffff;
+}
+
+/* Optional: Adjust the Select2 dropdown styling */
+.select2-container .select2-selection--multiple {
+    min-height: 40px; /* Adjusts the input height */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #273BE2;
+    color: #fff;
+    padding: 5px;
+    border-radius: 3px;
+}
+
+
+    </style>
 </head>
 <body>
     <div class="form-container">
@@ -17,11 +157,27 @@
             <input type="time" name="interview_time" value="{{ interview.interview_time }}" required>
 
             <label>Interviewers</label>
-            <input type="text" name="interviewers" value="{{ interview.interviewers }}" required>
+<select name="interviewers" class="select2-multiple" multiple required>
+    {% for interviewer in interviewers %}
+        <option value="{{ interviewer.id }}" {% if interviewer.id in selected_interviewers %}selected{% endif %}>
+            {{ interviewer.name }}
+        </option>
+    {% endfor %}
+</select>
 
+            
             <input type="submit" value="Update Interview">
         </form>
         <p><a href="{{ url_for('view_interviews') }}">Back to Scheduled Interviews</a></p>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('.select2-multiple').select2({
+                placeholder: "Select interviewers",
+                allowClear: true
+            });
+        });
+    </script>
+    
 </body>
 </html>

@@ -1,168 +1,527 @@
-/* hr.css */
+/* Reset and Body */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
 body {
-    font-family: Arial, sans-serif;
-    /* background: url('https://www.wallpapertip.com/wmimgs/66-666819_website-design-background-creative-background-image-for-website.jpg'); */
-    margin: 0;
-    background-image: #a0a0a0;
-    padding: 0;
     color: #333;
-}
-
-header {
-    background-color: #4CAF50; /* Green accent for header */
-    color: white;
-    padding: 20px 0;
-}
-
-.header-container {
-    text-align: center;
-}
-
-.header-container h1 {
-    margin: 0;
-    font-size: 35px;
-}
-
-#current-time {
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-.container {
-    display: flex;
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: var(--white); /* White background for container */
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.navigation {
-    width: 25%;
-    border-right: 1px solid #ddd;
-    padding-right: 20px;
-}
-
-.navigation ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.navigation ul li {
-    margin: 15px 0;
-}
-
-.navigation ul li a {
-    text-align: center;
-    display: inline-block;
-    margin: 5px;
-    color: #4CAF50; /* Green accent for links */
-    width: 200px;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 8px 12px;
-    border: 2px solid #4CAF50; /* Green border */
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.navigation ul li a:hover {
-    background-color: #4CAF50; /* Green background on hover */
-    color: white; /* White text on hover */
-}
-
-.section {
-    width: 75%;
-    padding-left: 20px;
-}
-
-h2 {
-    margin-top: 0;
-    color: #333;
-}
-
-table {
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
 }
 
-table th,
-table td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-table th {
-    background-color: #4CAF50; /* Green header */
-    color: white;
-}
-
-table tr:hover {
-    background-color: rgba(240, 240, 240, 0.9); /* Light hover effect */
-}
-
-.btn-container {
+/* Dashboard Container */
+.dashboard-container {
     display: flex;
-    justify-content: space-between; /* Ensures the buttons are spaced out evenly */
-    gap: 10px; /* Optional: adds space between the buttons */
+    min-height: 100vh;
 }
 
-.btn {
-    display: inline-block;
-    padding: 10px 15px;
-    background-color: #4CAF50; /* Green button */
-    color: white;
-    border-radius: 4px;
+/* Sidebar Styling */
+.sidebar {
+    width: 250px;
+    background: #273BE2 url('../images/sidebar-bg.jpg') no-repeat center;
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    position: fixed; /* Fix the sidebar in place */
+    height: 100vh; /* Full height of the viewport */
+    overflow-y: auto; /* Add scrolling for sidebar if content exceeds viewport height */
+}
+
+.brand-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.brand-logo img {
+    width: 80px;
+    margin-bottom: 10px;
+}
+
+.brand-logo h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #fff;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+}
+
+.sidebar-nav a {
+    padding: 10px;
+    color: #fff;
     text-decoration: none;
     font-weight: bold;
-    transition: background-color 0.3s;
-    text-align: center; /* Ensures text is centered */
-    flex-grow: 1; /* Ensures the buttons take up equal width if container width allows */
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    text-align: center;
+    transition: background 0.3s;
 }
 
-.btn:hover {
-    background-color: #388E3C; /* Darker green on hover */
+.sidebar-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.4);
 }
 
+.logout {
+    margin-top: auto;
+    background-color: #e74c3c;
+}
+
+
+.header h1 {
+    font-size: 1.8rem;
+}
+
+.header p {
+    font-size: 1rem;
+    color: #e8f5e9;
+}
+
+/* Style for the scrolling container */
+marquee {
+    overflow: hidden;
+    white-space: nowrap;
+    box-sizing: border-box;
+  }
+
+  
+
+/* Dashboard Statistics Section */
 .statistics {
-    margin-top: 30px;
-    padding-left: 20px;
-}
-
-.statistic-item {
-    background-color: #f9f9f9; /* Light grey background for statistic items */
     padding: 20px;
     border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
-.statistic-item h4 {
-    margin: 0 0 10px;
+.statistics h2 {
+    color: #273BE2;
+    border-bottom: 2px solid #273BE2;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+.statistics h4 {
+    
+    font-size: 1.5rem;
+}
+.statistics p {
+    font-size: 1.5rem;
 }
 
-.statistic-item p {
-    font-size: 24px;
+/* Main Content Styling */
+.main-content {
+    flex-grow: 1;
+    padding-left: 250px;
+    display: flex; /* Enable flexbox for main content */
+    flex-direction: column; /* Stack children vertically */
+}
+
+/* Manage Applications Section Full Width */
+.manage-applications {
+    width: 100%; /* Full width of the content wrapper */
+}
+
+/* Dashboard Statistics Section */
+.statistics-container {
+    display: flex; /* Enable flexbox for statistics */
+    flex-wrap: wrap; /* Allow wrapping of items */
+    gap: 38px; /* Space between statistic items */
+}
+
+/* Individual Statistic Item */
+.statistic-item {
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1; /* Equal space distribution */
+}
+
+h4 {
+    color: #ffffff; /* Color for the headings */
+}
+
+/* Job Postings Section Styles */
+/* Content Wrapper */
+.content-wrapper {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 20px; /* Add spacing between sections */
+    width: 100%;
+    background: url('https://wallpaperaccess.com/full/211012.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Job Postings and Statistics Section */
+.job-postings {
+    margin-bottom: 30px; 
+    padding: 30px;
+    border-radius: 2px;
+}
+.job-postings h2 {
+    font-size: 2.5em;
+    color: #273BE2;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #b0b0b0;
+}
+
+/* Updated Card Container for 3-Card Layout */
+/* .card-container {
+    margin-top: 15px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr)); /* Ensures up to 3 cards per row */
+    /* gap: 15px; Space between cards */
+
+
+.job-posting-card {
+    width: 350px;
+    border-radius: 19px;
+    padding: 25px;
+    transition: transform 0.2s;
+    opacity: 1;
+} 
+
+.card-container {
+    display: flex;                     /* Enable flexbox layout */
+    flex-wrap: wrap;                  /* Allow wrapping of items */
+    justify-content: space-between;    /* Space between the cards */
+    margin: 20px;                     /* Margin around the container */
+}
+
+.job-posting-card {
+    flex: 0 1 calc(33.33% - 20px);   /* Width of 33.33% minus space */
+    box-sizing: border-box;           /* Include padding and border in width */
+    border-radius: 10px;              /* Rounded corners *//* Gradient background */
+    box-shadow: 32px 32px 44px rgba(16, 24, 90, 0.3), -32px -32px 44px rgba(5, 5, 6, 0.3);
+    padding: 20px;                    /* Padding inside the card */
+    margin-bottom: 20px;              /* Space between rows */
+    transition: transform 0.2s;       /* Transition effect */
+}
+
+.job-posting-card:hover {
+    transform: translateY(-5px);      /* Lift effect on hover */
+}
+
+
+
+
+
+
+
+
+
+.job-posting-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.job-posting-card p {
+    margin: 5px 0; /* Minimal space between paragraphs */
+    color: #ccc;
+}
+
+
+
+
+/* Manage Applications */
+
+/* Manage Applications Section Styles */
+.manage-applications {
+    margin-bottom: 30px; 
+    background: #fff;
+    height: 100vh;
+    padding: 30px;
+    border-radius: 2px;
+}
+.manage-applications h2{
+    font-size: 2.5em;
+    color: #273BE2;
+    border-bottom: 2px solid #273BE2;
+}
+
+.application-card p a {
+    color: #273BE2; /* Link color */
+    text-decoration: none;
+    font-size: 1rem;
+    margin-right: 20px; /* Space between links */
     font-weight: bold;
-    color: #4CAF50; /* Green for statistics text */
+    transition: color 0.3s ease;
 }
 
-/* Responsive styles */
+.application-card p a:hover {
+    color: #1d6fa5; /* Darker color on hover */
+    text-decoration: underline;
+}
+.application-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Flexible card layout */
+    gap: 20px; /* Space between cards */
+
+}
+
+.application-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+/* Title and Text Styles */
+.application-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #273be2;
+}
+
+.application-card p {
+    margin: 5px 0; /* Minimal space between paragraphs */
+}
+
+
+.status-update {
+    margin-top: 10px; /* Space above the dropdown */
+}
+
+.action-buttons {
+    margin-top: 25px;
+    display: flex;                   /* Enable flexbox for the container */
+    gap: 10px;                      /* Space between buttons */
+}
+
+button {
+    display: flex;                  /* Maintain flex for button content */
+    align-items: center;           /* Center content vertically */
+    justify-content: center;       /* Center content horizontally */
+    outline: none;                 /* Remove outline */
+    cursor: pointer;               /* Pointer cursor */
+    width: 150px;                  /* Fixed width for buttons */
+    height: 40px;                  /* Fixed height for buttons */
+    border-radius: 30px;          /* Rounded corners */
+    border: 1px solid #8F9092;    /* Border styling */
+    transition: all 0.2s ease;    /* Smooth transition */
+    font-size: 14px;              /* Font size */
+    font-weight: 600;             /* Font weight */
+}
+
+.btn {                             /* Style for Apply and Edit buttons */
+    background-image: linear-gradient(to top, #D8D9DB 0%, #fff 80%, #FDFDFD 100%);
+                  /* Text color */
+}
+.btnn{
+    background-image: linear-gradient(to top, #273BE2 0%, #273be4 80%, #273be3 100%);
+    color: #fff;
+}
+
+.btn:hover,.btnn:hover {                      /* Hover effect for Apply and Edit buttons */
+    box-shadow: 0 4px 3px 1px #FCFCFC, 0 6px 8px #D6D7D9, 0 -4px 4px #CECFD1, 0 -6px 4px #FEFEFE, inset 0 0 3px 3px #CECFD1; 
+    background-color: #A4C8FF;    /* Light blue on hover */
+}
+
+
+.btn-delete {                    /* Style for Delete button */
+    background-color: #FF6F61;   /* Red background for Delete button */
+                  /* White text color for visibility */
+}
+
+.btn-delete:hover {              /* Hover effect for Delete button */
+    box-shadow: 0 4px 3px 1px #FF4C3B, 0 6px 8px #FF4C3B, 0 -4px 4px #FF4C3B, 0 -6px 4px #FF4C3B, inset 0 0 3px 3px #FF4C3B; 
+    background-color: #FF4C3B;   /* Darker red on hover */
+}
+
+
+
+
+#resumeModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    position: relative;
+    background-color: white;
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+/* Dropdown Styles */
+form {
+    display: inline; /* Ensure forms are displayed inline */
+}
+
+.down-image img {
+    width: 160px;
+}
+
+* {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+*::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
+
+select {
+    padding: 8px; /* Padding inside the dropdown */
+    border: 1px solid #ccc; /* Border color */
+    border-radius: 5px; /* Rounded corners */
+    background-color: #fff; /* White background */
+    color: #333; /* Text color */
+    font-size: 14px; 
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: border-color 0.3s; /* Transition effect for border color */
+}
+
+select:hover {
+    border-color: #273BE2; /* Change border color on hover */
+}
+
+select:focus {
+    outline: none; /* Remove outline on focus */
+    border-color: #273BE2; /* Change border color on focus */
+}
+
+/* Position the floating statistics over the job postings */
+.floating-statistics {
+    position: absolute; /* Overlay */
+    top: 0; /* Adjust vertical position */
+    right: 20px; /* Adjust horizontal position */
+    width: 990px;
+    z-index: 10; /* Bring it above other content */
+}
+
+.statistics-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+
+
+/* General Footer Styles */
+.footer {
+    background-color: #282c34; /* Dark background */
+    color: #ffffff; /* White text */
+    padding: 40px 20px; /* Padding for top and bottom, and side */
+    display: flex;
+    flex-direction: column; /* Stack sections vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    margin-left: 250px;
+}
+.footer h1{
+    padding: 15px 15px;
+    color: #273BE2;
+}
+
+/* Footer Content */
+.footer-content {
+    max-width: 1200px; /* Max width for content */
+    width: 100%; /* Full width */
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping of sections */
+    justify-content: space-between; /* Space between sections */
+}
+
+/* Footer Sections */
+.footer-section {
+    flex: 1 1 calc(33.333% - 20px); /* Each section takes 1/3 of the row with space */
+    margin: 10px; /* Margin around each section */
+    min-width: 250px; /* Minimum width for smaller screens */
+    box-sizing: border-box; /* Ensure padding is included in width calculations */
+}
+
+/* Headings */
+.footer-section h3 {
+    display: flex; /* Flex for icon and text alignment */
+    align-items: center; /* Center the icon and text */
+    font-size: 20px; /* Font size for headings */
+    margin-bottom: 10px; /* Margin below headings */
+}
+
+/* Icons */
+.footer-section h3 i {
+    margin-right: 10px; /* Space between icon and text */
+    color: #273BE2; /* Change icon color */
+    font-size: 24px; /* Icon size */
+}
+
+/* Links */
+.footer-section a {
+    color: #ffffff; /* Link color */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Block display for better spacing */
+    margin: 5px 0; /* Margin for links */
+}
+
+.footer-section a:hover {
+    color: #273BE2; /* Change color on hover */
+}
+
+/* Newsletter Form */
+.newsletter form {
+    display: flex; /* Flex for form elements */
+    margin-top: 10px; /* Margin on top of the form */
+}
+
+.newsletter input[type="email"] {
+    padding: 10px; /* Padding for input */
+    border: none; /* Remove border */
+    border-radius: 5px 0 0 5px; /* Rounded corners for left side */
+    flex: 1; /* Input takes full width */
+}
+
+.newsletter button {
+    padding: 10px; /* Padding for button */
+    border: none; /* Remove border */
+    background-color: #273BE2; /* Button background color */
+    color: #ffffff; /* Button text color */
+    border-radius: 0 5px 5px 0; /* Rounded corners for right side */
+    cursor: pointer; /* Cursor style */
+}
+
+.newsletter button:hover {
+    background-color: #273BE2; /* Darker blue on hover */
+}
+
+/* Copyright */
+.copyright {
+    text-align: center; /* Center text */
+    margin-top: 20px; /* Margin above copyright */
+}
+
+/* Responsive Styles */
 @media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-    }
-    .navigation {
-        width: 100%;
-        border-right: none;
-        padding-right: 0;
-    }
-    .section {
-        width: 100%;
-        padding-left: 0;
+    .footer-content {
+        flex-direction: column; /* Stack sections vertically on smaller screens */
+        align-items: center; /* Center items */
     }
 }

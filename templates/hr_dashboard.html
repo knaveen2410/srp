@@ -4,80 +4,183 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/hr.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>HR Dashboard</title>
 </head>
 <body>
-    <header>
-        <div class="header-container">
-            <h1>Welcome, {{ username }}!</h1>
-            <p id="current-time">{{ current_time }}</p>
-        </div>
-    </header>
-    <div class="container">
-        <nav class="navigation">
-            <ul>
-                <li><a href="{{ url_for('view_jobs') }}">Manage Job Postings</a></li>
-                <li><a href="{{ url_for('manage_applications') }}">Manage Applications</a></li>
-                <li><a href="{{ url_for('generate_reports') }}">Generate Reports</a></li>
-                <li><a href="{{ url_for('logout') }}">Logout</a></li>
-            </ul>
-        </nav>
+    <div class="dashboard-container">
+        <!-- Sidebar Section with Brand Logo and Navigation Links -->
+        <aside class="sidebar">
+            <div class="brand-logo">
+                <img src="https://th.bing.com/th/id/OIP.w1iz5yi0zSryHoiEhLNeRgHaHa?w=170&h=180&c=7&r=0&o=5&pid=1.7" alt="Brand Logo">
+                <h2>HR Panel</h2>
+                <h1>Welcome, {{ username }}!</h1>
+                
+            </div>
+            <nav class="sidebar-nav">
+                <a href="{{ url_for('generate_reports') }}">Generate Reports</a>
+                <a href="{{ url_for('create_job') }}">Create New Job Posting</a>
+                <a href="{{ url_for('view_interviews') }}">View Scheduled Interviews</a>
+                <a href="{{ url_for('view_candidates') }}">View End-Users</a>
+                <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+            </nav>
+            <p id="current-time">Logged in Time: {{ current_time }}</p>
+        </aside>
 
-        <div class="section">
-            <div class="btn-container">
-                <p><a class="btn" href="{{ url_for('create_job') }}">Create New Job Posting</a></p>
-                <p><a class="btn" href="{{ url_for('view_interviews') }}">View Scheduled Interviews</a></p>
-                <p><a class="btn" href="{{ url_for('view_candidates') }}">View Candidates</a></p>
-            </div>            
-            <h2>Job Postings</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Job Title</th>
-                    <th>Department</th>
-                    <th>Status</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for job in job_postings %}
-                <tr>
-                    <td>{{ job.job_title }}</td>
-                    <td>{{ job.department }}</td>
-                    <td>{{ job.status }}</td>
-                    <td class="action-links">
-                        {% if session['role'] == 'Candidate' %}
-                            <form action="{{ url_for('apply_job', job_id=job.id) }}" method="POST" style="display:inline;">
-                                <input type="submit" value="Apply" class="btn">
-                            </form>
-                        {% elif session['role'] in ['HR Manager', 'Admin'] %}
-                            <form action="{{ url_for('edit_job', job_id=job.id) }}" method="GET" style="display:inline;">
-                                <input type="submit" value="Edit" class="btn">
-                            </form>
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <!-- Main Content Area -->
+        <main class="main-content">
             
-        </div>
+            <!-- Main Content Wrapper -->
+            <div class="content-wrapper">
+                <!-- Left Content Area with Job Postings -->
+                <div class="content-left">
+                    <!-- Job Postings Section -->
+                    <section class="job-postings">
+                        <h2>Job Postings</h2>
+                        <div class="card-container">
+                            {% for job in job_postings %}
+                            <div class="job-posting-card">
+                                <h3>{{ job.job_title }}</h3>
+                                <p><strong>Department:</strong> {{ job.department }}</p>
+                                <p><strong>Status:</strong> {{ job.status }}</p>
+                                <div class="action-buttons">
+                                    {% if session['role'] == 'Candidate' %}
+                                        <button class="btn" onclick="event.preventDefault(); document.getElementById('apply-job-{{ job.id }}').submit();">Apply</button>
+                                        <form id="apply-job-{{ job.id }}" action="{{ url_for('apply_job', job_id=job.id) }}" method="POST" style="display: none;"></form>
+                                    {% elif session['role'] in ['HR Manager', 'Admin','Recruiter'] %}
+                                        <button class="btn" onclick="event.preventDefault(); document.getElementById('edit-job-{{ job.id }}').submit();">Edit</button>
+                                        <form id="edit-job-{{ job.id }}" action="{{ url_for('edit_job', job_id=job.id) }}" method="GET" style="display: none;"></form>
+                                        
+                                        <button class="btn-delete" onclick="if(confirm('Are you sure you want to delete this job posting?')) { event.preventDefault(); document.getElementById('delete-job-{{ job.id }}').submit(); }">Delete</button>
+                                        <form id="delete-job-{{ job.id }}" action="{{ url_for('delete_job', job_id=job.id) }}" method="POST" style="display: none;"></form>
+                                    {% endif %}
+                                </div>
+                                                               
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </section>
+                </div>
+                <div class="content-right">
+                    <div class="floating-statistics">
+                        <section class="statistics">
+                            <marquee width="100%" direction="left" height="50px" scrollamount="15">
+                                <div class="statistics-container">
+                                    <div class="statistic-item">
+                                        <h4>Total Job Postings : {{ total_jobs }} Total Applications: {{ total_applications }} Total Interviews Scheduled : {{ total_interviews }} Total Candidates: {{ total_candidates }} Total Interviewers : {{ total_interviewers }}</h4>
+                                    </div>
+                                </div>
+                            </marquee>
+                        </section>
+                    </div>
+                </div>
+                
+                <!-- Right Content Area with Dashboard Statistics -->
+            </div>
+            
+            <!-- Manage Applications Section -->
+            <!-- Manage Applications Section -->
+<section class="manage-applications">
+    <h2>Manage Applications</h2>
+    <div class="application-card-container">
+        {% for application in applications %}
+        <div class="application-card">
+            <h3>{{ application.applicant_name }}</h3>
+            <p><strong>Job Title:</strong> {{ application.job_title }}</p>
+            <p>
+                <a href="#" onclick="openResumeModal('{{ url_for('view_resume', filename=application.resume) }}')">View Resume</a>
+                <a href="{{ url_for('uploadResume') }}">Score Resume</a>
+            </p>
+            <div class="status-update">
+                <form action="{{ url_for('update_application_status', application_id=application.id) }}" method="POST" class="inline-form">
+                    <select name="status" onchange="this.form.submit()">
+                        <option value="Under Review" {% if application.status == 'Under Review' %}selected{% endif %}>Under Review</option>
+                        <option value="Accepted" {% if application.status == 'Accepted' %}selected{% endif %}>Accepted</option>
+                        <option value="Rejected" {% if application.status == 'Rejected' %}selected{% endif %}>Rejected</option>
+                    </select>
+                </form>
+            </div>
+            <div class="action-buttons">
+                <button class="btnn" onclick="location.href='{{ url_for('schedule_interview', application_id=application.id) }}'">Schedule Interview</button>
 
-        <section class="statistics">
-            <h2>Dashboard Statistics</h2>
-            <div class="statistic-item">
-                <h4>Total Job Postings</h4>
-                <p>{{ total_jobs }}</p>
             </div>
-            <div class="statistic-item">
-                <h4>Total Applications</h4>
-                <p>{{ total_applications }}</p>
-            </div>
-            <div class="statistic-item">
-                <h4>Total Interviews Scheduled</h4>
-                <p>{{ total_interviews }}</p>
-            </div>
-        </section>
+        </div>
+        {% endfor %}
     </div>
+</section>
+
+
+            <!-- Modal Structure for Viewing Resume -->
+            <div id="resumeModal" style="display: none;">
+                <div class="modal-content">
+                    <span onclick="closeResumeModal()" class="close">&times;</span>
+                    <iframe id="resumeIframe" width="100%" height="500px" style="border: none;"></iframe>
+                </div>
+            </div>
+            
+            <!-- JavaScript for Modal Operations -->
+            <script>
+                function openResumeModal(resumeUrl) {
+                    document.getElementById('resumeIframe').src = resumeUrl;
+                    document.getElementById('resumeModal').style.display = 'flex';
+                }
+                function closeResumeModal() {
+                    document.getElementById('resumeModal').style.display = 'none';
+                    document.getElementById('resumeIframe').src = '';
+                }
+            </script>
+        </main>
+        
+    </div>
+
+    <footer class="footer">
+        <h1>Smart Recruiting Platform</h1>
+        <div class="footer-content">
+            <div class="footer-section contact-info">
+                <h3><i class="fas fa-envelope"></i> Contact Us</h3>
+                <p>Email: <a href="mailto:smartrecruting@gmail.com">smartrecruting@gmail.com</a></p>
+                <p>Phone: <a href="tel:+9194939798440">+91 949397 98440</a></p>
+                <p>No.42, Avadi-Vel Tech Road, Vel Nagar, Avadi, Chennai – 600 062, Tamil Nadu, India.</p>
+            </div>
+            <div class="footer-section social-media">
+                <h3><i class="fab fa-facebook-f"></i> Follow Us</h3>
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+            
+            <div class="footer-section newsletter">
+                <h3><i class="fas fa-paper-plane"></i> Subscribe to Our Newsletter</h3>
+                <p>Stay updated with the latest news and offers. Enter your email below:</p>
+                <form action="#" method="post">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <div class="footer-section additional-content">
+                <h3><i class="fas fa-info-circle"></i> About Us</h3>
+                <p>We are committed to providing the best service. Our team is dedicated to meeting your needs.</p>
+            </div>
+            <div class="footer-section faq">
+                <h3><i class="fas fa-question-circle"></i> Frequently Asked Questions</h3>
+                <ul>
+                    <li><a href="#faq1">What services do you offer?</a></li>
+                    <li><a href="#faq2">How can I contact support?</a></li>
+                    <li><a href="#faq3">Where are you located?</a></li>
+                    <li><a href="#faq4">Do you offer refunds?</a></li>
+                </ul>
+            </div>
+            <div class="footer-section copyright">
+                <p>&copy; 2024 Smart Recruiting Platform. All Rights Reserved.</p>
+            </div>
+
+
+        </div>
+    </footer>
+    
+    
+
+
 </body>
 </html>

@@ -4,34 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/cf.css') }}">
-    <title>Your Interview Feedback</title>
+    <title>Interview Feedback</title>
 </head>
 <body>
-    <div class="feedback-container">
-        <h2>Your Interview Feedback</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Feedback</th>
-                    <th>Rating</th>
-                    <th>Selection Status</th>
-                </tr>
-            </thead>
-            <tbody>
+    <div class="container">
+        <!-- Left Section for Image -->
+        <div class="left-section">
+            <img src="https://th.bing.com/th/id/R.b087b129fb1dd41f6b19cfd80d131c4f?rik=VB%2btPCxwFCU5kg&riu=http%3a%2f%2fcareer.actuary.com%2fwp-content%2fuploads%2f2012%2f04%2fInterviewFeedbackVeryImportant.jpg&ehk=MaGSKG3mBIfIWdpvcXwC%2b26MwXtWafH1r%2b9kUnrSiss%3d&risl=&pid=ImgRaw&r=0" alt="Feedback Image">
+        </div>
+
+        <!-- Right Section for Feedback Table -->
+        <div class="right-section">
+            <h2>Interview Feedback</h2>
+            <section class="feedback-cards">
                 {% for feedback in feedback_data %}
-                    <tr>
-                        <td>{{ feedback.name }}</td>
-                        <td>{{ feedback.feedback }}</td>
-                        <td>{{ feedback.rating }}</td>
-                        <td>{{ feedback.selection_status }}</td>
-                    </tr>
+                    <div class="feedback-card">
+                        <p><strong>Name:</strong> {{ feedback.name }}</p>
+                        <p><strong>Feedback:</strong> {{ feedback.feedback }}</p>
+                        <p><strong>Rating:</strong> {{ feedback.rating }}</p>
+                        <p><strong>Selection Status:</strong> {{ feedback.selection_status }}</p>
+                    </div>
                 {% endfor %}
-            </tbody>
-        </table>
-        <p>
-            <a href="{{ url_for('candidate_dashboard') }}">Back to Dashboard</a>
-        </p>
+            </section>
+            <p>
+                <a class="dashboard-link" href="{{ url_for('candidate_dashboard') }}">Back to Dashboard</a>
+            </p>
+        </div>
+        
     </div>
 </body>
 </html>

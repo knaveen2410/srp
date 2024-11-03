@@ -1,0 +1,342 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+}
+
+/* Container for the entire dashboard */
+.dashboard-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar styles */
+.sidebar {
+    width: 250px;
+    background: #273BE2;
+    color: #ecf0f1;
+    padding: 20px;
+    position: fixed;
+    height: 100%;
+}
+
+.brand-logo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.brand-logo img {
+    width: 80px;
+    height: auto;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-nav a {
+    padding: 15px;
+    color: #ecf0f1;
+    background: #414cad;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background 0.3s;
+}
+
+.sidebar-nav a:hover {
+    background: #88898d;
+}
+
+.logout {
+    margin-top: auto;
+    background: #e74c3c;
+    text-align: center;
+}
+
+/* Main content styles */
+.main-content {
+    margin-left: 250px;
+
+    overflow-y: auto;
+}
+
+.section h2{
+    font-size: 1.8rem;
+    color: #273BE2;
+}
+
+
+.header h2 {
+    margin-bottom: 10px;
+}
+
+.header a {
+    margin-right: 15px;
+    text-decoration: none;
+    color: #273BE2;
+    transition: color 0.3s;
+}
+
+.header a:hover {
+    color: #273BE2;
+}
+
+/* Section styles */
+.section {
+    background: #fff;
+    padding: 20px;
+}
+
+/* Card container styles */
+.card-container, .metrics-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    
+}
+.card-container h3{
+    font-size: 1.5rem;
+}
+
+/* Individual card styles */
+.card, .metrics-card, .application-card {
+    flex: 1 1 calc(33.333% - 15px);
+    background: rgba(255,255,255,0.1);
+-webkit-backdrop-filter: blur(10px);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card h3, .card h2 {
+    margin-bottom: 10px;
+}
+/* Job Postings Section Styles */
+.job-postings-section {
+    padding: 20px; /* Add padding around the job postings section */
+    
+}
+
+.job-card-container {
+    display: grid; /* Use CSS Grid for layout */
+    grid-template-columns: repeat(2, 1fr); /* Two columns per row */
+    gap: 20px; /* Space between the cards */
+    
+}
+
+.job-card {
+    background: rgba(255,255,255,0.1);
+-webkit-backdrop-filter: blur(10px);
+backdrop-filter: blur(10px);
+border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid #dcdcdc; /* Light border around the cards */
+    border-radius: 8px; /* Rounded corners for the cards */
+    padding: 15px; /* Padding inside the cards */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: transform 0.2s; /* Animation for hover effect */
+}
+
+.job-card:hover {
+    transform: translateY(-5px); /* Slightly lift the card on hover */
+}
+
+.job-header h3 {
+    font-size: 20px; /* Font size for job title */
+    margin: 0; /* Remove default margin */
+}
+
+.job-details p {
+    margin: 5px 0; /* Space between job detail paragraphs */
+}
+
+.apply-button {
+    background-color: #3498db; /* Apply button color */
+    color: #ffffff; /* Text color for the button */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px 15px; /* Padding inside the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.apply-button:hover {
+    background-color: #2980b9; /* Darker shade on hover */
+}
+
+
+
+/* Form styles */
+form {
+    margin-top: 10px;
+}
+
+form select {
+    margin-right: 10px;
+    padding: 5px;
+}
+/* Header Styles */
+.header {
+    background-color: #273BE2; /* Dark background color for the header */
+    color: #ecf0f1; /* Light text color */
+    padding: 20px; /* Padding around the header */
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space between title and links */
+    align-items: center; /* Vertically center items */
+    border-bottom: 2px solid #273BE2; /* Bottom border for separation */
+}
+
+.section p{
+    color: #dcdcdc;
+}
+.section h3{
+    color: #273BE2;
+    font-size: 1rem;
+}
+
+/* Navigation Links Styles */
+.header a {
+    color: #ecf0f1; /* Link text color */
+    text-decoration: none; /* Remove underline from links */
+    padding: 10px 15px; /* Padding for clickable area */
+    border-radius: 5px; /* Rounded corners for links */
+    transition: background 0.3s, color 0.3s; /* Smooth transition for background and color */
+}
+
+.header a:hover {
+    background-color: #273BE2; /* Background color change on hover */
+    color: #ffffff; /* Text color change on hover */
+}
+#Interviews{
+    height: 100vh;
+    background: url('https://wallpaperaccess.com/full/2454628.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#Metrics{
+    height: 80vh;
+    background: url('https://img.freepik.com/free-vector/background-abstract-line-digital-gradient-luxury_483537-2347.jpg?ga=GA1.1.1004549663.1730185390&semt=ais_hybrid');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#JobPostings{
+    background: url('https://wallpaperaccess.com/full/2886084.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+} 
+#Applications{
+    height: 100vh;
+    background: url('https://img.freepik.com/free-photo/student-boy-using-laptop-learning-online-education_1150-16903.jpg?ga=GA1.1.1004549663.1730185390&semt=ais_hybrid');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* General Footer Styles */
+.footer {
+    background-color: #282c34; /* Dark background */
+    color: #ffffff; /* White text */
+    padding: 40px 20px; /* Padding for top and bottom, and side */
+    display: flex;
+    flex-direction: column; /* Stack sections vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    margin-left: 250px;
+}
+.footer h1{
+    padding: 15px 15px;
+    color: #273BE2;
+}
+
+/* Footer Content */
+.footer-content {
+    max-width: 1200px; /* Max width for content */
+    width: 100%; /* Full width */
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping of sections */
+    justify-content: space-between; /* Space between sections */
+}
+
+/* Footer Sections */
+.footer-section {
+    flex: 1 1 calc(33.333% - 20px); /* Each section takes 1/3 of the row with space */
+    margin: 10px; /* Margin around each section */
+    min-width: 250px; /* Minimum width for smaller screens */
+    box-sizing: border-box; /* Ensure padding is included in width calculations */
+}
+
+/* Headings */
+.footer-section h3 {
+    display: flex; /* Flex for icon and text alignment */
+    align-items: center; /* Center the icon and text */
+    font-size: 20px; /* Font size for headings */
+    margin-bottom: 10px; /* Margin below headings */
+}
+
+/* Icons */
+.footer-section h3 i {
+    margin-right: 10px; /* Space between icon and text */
+    color: #273BE2; /* Change icon color */
+    font-size: 24px; /* Icon size */
+}
+
+/* Links */
+.footer-section a {
+    color: #ffffff; /* Link color */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Block display for better spacing */
+    margin: 5px 0; /* Margin for links */
+}
+
+.footer-section a:hover {
+    color: #273BE2; /* Change color on hover */
+}
+
+/* Newsletter Form */
+.newsletter form {
+    display: flex; /* Flex for form elements */
+    margin-top: 10px; /* Margin on top of the form */
+}
+
+.newsletter input[type="email"] {
+    padding: 10px; /* Padding for input */
+    border: none; /* Remove border */
+    border-radius: 5px 0 0 5px; /* Rounded corners for left side */
+    flex: 1; /* Input takes full width */
+}
+
+.newsletter button {
+    padding: 10px; /* Padding for button */
+    border: none; /* Remove border */
+    background-color: #273BE2; /* Button background color */
+    color: #ffffff; /* Button text color */
+    border-radius: 0 5px 5px 0; /* Rounded corners for right side */
+    cursor: pointer; /* Cursor style */
+}
+
+.newsletter button:hover {
+    background-color: #273BE2; /* Darker blue on hover */
+}
+
+/* Copyright */
+.copyright {
+    text-align: center; /* Center text */
+    margin-top: 20px; /* Margin above copyright */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Stack sections vertically on smaller screens */
+        align-items: center; /* Center items */
+    }
+}

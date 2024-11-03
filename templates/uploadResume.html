@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/uploadR.css') }}">
+    <title>Upload Resume</title>
+</head>
+<body>
+    <!-- Loading overlay -->
+    <div id="loading">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Main content container -->
+    <div class="container">
+        <!-- Left section for resume upload -->
+        <div class="left">
+            <h1>Upload Resume</h1>
+            <form id="resumeForm" action="{{ url_for('uploadResume') }}" method="post" enctype="multipart/form-data" onsubmit="showLoading()">
+                <input type="file" name="resume" required>
+                <input type="submit" value="Parse Resume">
+            </form>
+            <p>
+            {% if session['role'] == 'HR Manager' %}
+                <a href="{{ url_for('hr_dashboard') }}">Back to HR Dashboard</a>
+            {% elif session['role'] == 'Admin' %}
+                <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+            {% elif session['role'] == 'Candidate' %}
+                <a href="{{ url_for('candidate_dashboard') }}">Back to Candidate Dashboard</a>
+            {% elif session['role'] == 'Interviewer' %}
+                <a href="{{ url_for('interviewer_dashboard') }}">Back to Interviewer Dashboard</a>
+            {% elif session['role'] == 'Recruiter' %}
+                <a href="{{ url_for('recruiter_dashboard') }}">Back to Recruiter Dashboard</a>
+            {% endif %}
+        </p>
+        </div>
+
+        <!-- Right section for displaying resume analysis -->
+        <div class="right">
+            <h1>Resume Analysis</h1>
+            {% if score is not none %}
+                <h2>Score: {{ score }}/100</h2>
+                <h3>Key Points:</h3>
+                <ul>
+                    {% for point in key_points %}
+                        <li>{{ point }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- JavaScript for loading spinner -->
+    <script>
+        function showLoading() {
+            document.getElementById("loading").style.visibility = "visible";
+        }
+    </script>
+</body>
+</html>

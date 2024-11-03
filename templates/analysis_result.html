@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Analysis Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>AI-Powered Resume Analysis Results</h1>
+    {% if error %}
+        <p>{{ error }}</p>
+    {% else %}
+        <p>Total Score: {{ total_score }} / 100</p>
+        <ul>
+            {% for section, score in detailed_score.items() %}
+                <li>{{ section.replace('_', ' ').title() }}: {{ score }} / {{ 100 / detailed_score|length }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <a href="/upload_resume">Analyze Another Resume</a>
+</body>
+</html>

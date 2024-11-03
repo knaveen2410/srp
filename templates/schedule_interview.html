@@ -3,25 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>Schedule Interview</title>
+    <style>
+        /* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+.text{
+}
+
+body {
+    background-color: #f4f4f9; /* Light grey background */
+    color: #333;
+}
+
+/* Layout Container */
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Left Side (Image & Header) */
+.left-side {
+    flex: 1;
+    background: url('https://img.freepik.com/free-vector/people-waiting-job-interview-concept_23-2148642183.jpg?ga=GA1.1.1004549663.1730185390&semt=ais_siglip');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.left-side h1 {
+    font-size: 2.5rem;
+    color: #273BE2;
+}
+
+.left-side p {
+    font-size: 1rem;
+    color: #333;
+}
+
+/* Right Side (Form Section) */
+.right-side {
+    flex: 1;
+    background-image: linear-gradient(315deg, rgba(39, 59, 226, 0.48) 11%, #fff 79%);
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.right-side h2 {
+    font-size: 1.8rem;
+    color: #273BE2;
+    margin-bottom: 20px;
+}
+
+.right-side form {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-side label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.right-side input,
+.right-side select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+.text{
+    padding-bottom: 580px;
+}
+
+/* Multiple Select Style */
+select[multiple] {
+    height: auto;
+    padding: 8px;
+}
+
+/* Button Style */
+button {
+    padding: 10px;
+    background-color: #273BE2;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #1a1a1a;
+}
+
+/* Link Back to Dashboard */
+.right-side p {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.right-side a {
+    color: #273BE2;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.right-side a:hover {
+    text-decoration: underline;
+}
+
+
+    </style>
 </head>
 <body>
-    <div class="form-container">
-        <h2>Schedule Interview</h2>
-        <form method="POST" action="{{ url_for('schedule_interview', application_id=application_id) }}">
-            <label>Interview Date</label>
-            <input type="date" name="interview_date" required>
+    <div class="container">  
+        <div class="left-side">
+            <div class="text">
+                <h1>------- Schedule an Interview -------</h1>
+                <marquee scrollamount="10">
+                    <p>Coordinate with your team and find a suitable time slot for the interview.</p>
+                </marquee>
+            </div>
+        </div>
+        <div class="right-side">
+            <h2>Set Interview Details</h2>
+            <form method="POST" action="{{ url_for('schedule_interview', application_id=application_id) }}">
+                <label for="interview_date">Interview Date:</label>
+                <input type="date" name="interview_date" required>
 
-            <label>Interview Time</label>
-            <input type="time" name="interview_time" required>
+                <label for="interview_time">Interview Time:</label>
+                <input type="time" name="interview_time" required>
 
-            <label>Interviewers</label>
-            <input type="text" name="interviewers" placeholder="Enter names of interviewers" required>
+                <label for="interviewers">Select Interviewer:</label>
+                <select name="interviewers" id="interviewers" required>
+                    <option value="" disabled selected>Select an interviewer</option>
+                    {% for interviewer in interviewers %}
+                        <option value="{{ interviewer.id }}">{{ interviewer.name }}</option>
+                    {% endfor %}
+                </select>
 
-            <input type="submit" value="Schedule Interview">
-        </form>
-        <p><a href="{{ url_for('manage_applications') }}">Back to Manage Applications</a></p>
+
+                <button type="submit">Schedule Interview</button>
+            </form>
+            <p>
+                {% if session['role'] == 'HR Manager' %}
+                    <a href="{{ url_for('hr_dashboard') }}">Back to HR Dashboard</a>
+                {% elif session['role'] == 'Admin' %}
+                    <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+                {% elif session['role'] == 'Candidate' %}
+                    <a href="{{ url_for('candidate_dashboard') }}">Back to Candidate Dashboard</a>
+                {% elif session['role'] == 'Interviewer' %}
+                    <a href="{{ url_for('interviewer_dashboard') }}">Back to Interviewer Dashboard</a>
+                {% elif session['role'] == 'Recruiter' %}
+                    <a href="{{ url_for('recruiter_dashboard') }}">Back to Recruiter Dashboard</a>
+                {% endif %}
+            </p>
+        </div>
     </div>
 </body>
 </html>

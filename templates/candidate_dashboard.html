@@ -7,85 +7,234 @@
     <title>Candidate Dashboard</title>
 </head>
 <body>
-    <div class="container">
-        <h1>WELCOME TO SMART RECRUITING PLATFORM</h1>
-        
-        <div class="dashboard-layout">
-            <!-- Navigation Links on the left -->
+    <div class="dashboard-container">
+        <!-- Sidebar Section with Brand Logo -->
+        <aside class="sidebar">
+            <div class="brand-logo">
+                <img src="https://th.bing.com/th/id/OIP.w1iz5yi0zSryHoiEhLNeRgHaHa?w=170&h=180&c=7&r=0&o=5&pid=1.7" alt="Brand Logo">
+                <h2>Candidate Panel</h2>
+                <h1>Welcome, {{ username }}!</h1>
+            </div>
             <nav class="dashboard-actions">
-                <a href="{{ url_for('edit_profile') }}" class="button">Edit Profile</a>
-                <a href="{{ url_for('view_applications') }}" class="button">View My Applications</a>
                 <a href="{{ url_for('candidate_feedback')}}" class="button">Feedback or Result</a>
+                <a href="/upload" class="button">Resume Parser</a>
                 <a href="{{ url_for('logout') }}" class="button">Logout</a>
             </nav>
+        </aside>
 
-            <!-- Job Postings Section on the right -->
-            <div class="job-postings-section">
-                <h2>Available Job Postings</h2>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Job Title</th>
-                            <th>Department</th>
-                            <th>Status</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+        <!-- Main Dashboard Content Area -->
+        <main class="main-content">
+            <!-- Horizontal Navigation Bar -->
+            <header class="nav-bar">
+                <a href="#job-postings" class="nav-link">Available Job Postings</a>
+                <a href="#my-applications" class="nav-link">My Applications</a>
+                <a href="#upcoming-interviews" class="nav-link">Upcoming Interviews</a>
+            </header>
+
+            <div class="sections-container">
+                <!-- Job Postings Section -->
+                <section id="job-postings" class="section-container">
+                    <h2>Available Job Postings</h2>
+                    <div class="card-container">
                         {% for job in job_postings %}
-                        <tr>
-                            <td>{{ job.job_title }}</td>
-                            <td>{{ job.department }}</td>
-                            <td>{{ job.status }}</td>
-                            <td class="action-links">
+                        <div class="job-posting-card card">
+                            <h3>{{ job.job_title }}</h3>
+                            <div class="card-content">
+                                <p><strong>Department:</strong> {{ job.department }}</p>
+                                <p><strong>Status:</strong> {{ job.status }}</p>
+                            </div>
+                            <div class="action-links">
                                 {% if session['role'] == 'Candidate' %}
                                     {% if job.id in applied_jobs %}
                                         <span>Applied</span>
                                     {% else %}
-                                        <form action="{{ url_for('apply_job', job_id=job.id) }}" method="POST" style="display:inline;">
+                                        <form action="{{ url_for('apply_job', job_id=job.id) }}" method="POST">
                                             <input type="submit" value="Apply" class="btn">
                                         </form>
                                     {% endif %}
                                 {% elif session['role'] in ['HR Manager', 'Admin'] %}
-                                    <form action="{{ url_for('edit_job', job_id=job.id) }}" method="GET" style="display:inline;">
-                                        <input type="submit" value="Edit" class="btn">
-                                    </form>
+                                    <a href="{{ url_for('edit_job', job_id=job.id) }}" class="btn">Edit</a>
                                     <form action="{{ url_for('delete_job', job_id=job.id) }}" method="POST" style="display:inline;">
                                         <input type="submit" value="Delete" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this job posting?');">
                                     </form>
                                 {% endif %}
-                            </td>
-                        </tr>
+                            </div>
+                        </div>
+                        {% else %}
+                        <p class="no-records">No job postings available at the moment.</p>
                         {% endfor %}
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                    </div>
+                </section>
 
-        <!-- Upcoming Interviews Section below -->
-        <div class="upcoming-interviews">
-            <h2>Upcoming Interviews</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Candidate Name</th>
-                        <th>Interview Date</th>
-                        <th>Interview Time</th>
-                        <th>Interviewers</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for interview in interviews %}
-                    <tr>
-                        <td>{{ interview.candidate_name }}</td>
-                        <td>{{ interview.interview_date }}</td>
-                        <td>{{ interview.interview_time }}</td>
-                        <td>{{ interview.interviewers }}</td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                <!-- My Applications Section -->
+                <section id="my-applications" class="section-container">
+                    <h2>My Applications</h2>
+                    <div class="card-container">
+                        {% for application in applications %}
+                        <div class="application-card card">
+                            <h3>{{ application.job_title }}</h3>
+                            <div class="card-content">
+                                <p><strong>Candidate Name:</strong> {{ application.candidate_name }}</p>
+                                <p><strong>Status:</strong> {{ application.status }}</p>
+                                <p><strong>Date Applied:</strong> {{ application.date_applied }}</p>
+                                <p>
+                                    {% if application.resume %}
+                                        <a href="#" onclick="openResumeModal('{{ url_for('static', filename='resume/' + application.resume) }}')">View Resume</a>
+                                    {% else %}
+                                        No Resume Uploaded
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <form action="{{ url_for('delete_application', application_id=application.id) }}" method="POST" style="display:inline;">
+                                <input type="submit" value="Delete" class="btn btn-delete" onclick="return confirm('Are you sure you want to delete this application?');">
+                            </form>
+                        </div>
+                        {% else %}
+                        <p class="no-records">No applications available at the moment.</p>
+                        {% endfor %}
+                    </div>
+                </section>
+
+                <!-- Upcoming Interviews Section -->
+                <section id="upcoming-interviews" class="section-container">
+                    <h2>Upcoming Interviews</h2>
+                    <div class="card-container">
+                        {% for interview in interviews %}
+                        <div class="interview-card card">
+                            <h3>{{ interview.candidate_name }}</h3>
+                            <div class="card-content">
+                                <p><strong>Date:</strong> {{ interview.interview_date }}</p>
+                                <p><strong>Time:</strong> {{ interview.interview_time }}</p>
+                                <p><strong>Interviewers:</strong> {{ interview.interviewer_name }}</p>
+                            </div>
+                        </div>
+                        {% else %}
+                        <p class="no-records">No upcoming interviews.</p>
+                        {% endfor %}
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal Structure for Resume View -->
+    <div id="resumeModal" style="display: none;">
+        <div class="modal-content">
+            <span onclick="closeResumeModal()" class="close">&times;</span>
+            <iframe id="resumeIframe" width="100%" height="500px" style="border: none;"></iframe>
         </div>
     </div>
+
+    <script>
+        function openResumeModal(resumeUrl) {
+            document.getElementById('resumeIframe').src = resumeUrl;
+            document.getElementById('resumeModal').style.display = 'flex';
+        }
+
+        function closeResumeModal() {
+            document.getElementById('resumeModal').style.display = 'none';
+            document.getElementById('resumeIframe').src = '';
+        }
+    </script>
+    <footer class="footer">
+        <h1>Smart Recruiting Platform</h1>
+        <div class="footer-content">
+            <div class="footer-section contact-info">
+                <h3><i class="fas fa-envelope"></i> Contact Us</h3>
+                <p>Email: <a href="mailto:smartrecruting@gmail.com">smartrecruting@gmail.com</a></p>
+                <p>Phone: <a href="tel:+9194939798440">+91 949397 98440</a></p>
+                <p>No.42, Avadi-Vel Tech Road, Vel Nagar, Avadi, Chennai – 600 062, Tamil Nadu, India.</p>
+            </div>
+            <div class="footer-section social-media">
+                <h3><i class="fab fa-facebook-f"></i> Follow Us</h3>
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+            
+            <div class="footer-section newsletter">
+                <h3><i class="fas fa-paper-plane"></i> Subscribe to Our Newsletter</h3>
+                <p>Stay updated with the latest news and offers. Enter your email below:</p>
+                <form action="#" method="post">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <div class="footer-section additional-content">
+                <h3><i class="fas fa-info-circle"></i> About Us</h3>
+                <p>We are committed to providing the best service. Our team is dedicated to meeting your needs.</p>
+            </div>
+            <div class="footer-section faq">
+                <h3><i class="fas fa-question-circle"></i> Frequently Asked Questions</h3>
+                <ul>
+                    <li><a href="#faq1">What services do you offer?</a></li>
+                    <li><a href="#faq2">How can I contact support?</a></li>
+                    <li><a href="#faq3">Where are you located?</a></li>
+                    <li><a href="#faq4">Do you offer refunds?</a></li>
+                </ul>
+            </div>
+            <div class="footer-section copyright">
+                <p>&copy; 2024 Smart Recruiting Platform. All Rights Reserved.</p>
+            </div>
+
+
+        </div>
+    </footer>
+
+     <!-- Popup Chat Window -->
+     <div id="chatPopup" class="chat-popup">
+        <div class="chat-popup-header">
+            <span>Chat with Us</span>
+            <button class="close-btn" onclick="toggleChat(event)">✖</button>
+        </div>
+        <div class="chat-container" id="chat-box"></div>
+        <!-- Wrap input and button in a container -->
+<div class="input-container">
+    <input type="text" id="user-input" placeholder="Type a message">
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+    </div>
+
+    <!-- Minimized Chat Button -->
+    <button class="chat-btn" id="chatBtn" onclick="toggleChat()">💬</button>
+
+    <script>
+        // Toggle the visibility of the chat popup
+        function toggleChat(event) {
+            if (event) event.stopPropagation(); // Prevent event bubbling on close button
+
+            const chatPopup = document.getElementById("chatPopup");
+            const chatBtn = document.getElementById("chatBtn");
+
+            // Open or close the chat based on current state
+            if (chatPopup.style.display === "flex") {
+                chatPopup.style.display = "none"; // Close the chat
+                chatBtn.style.display = "flex";    // Show the chat button
+            } else {
+                chatPopup.style.display = "flex";  // Open the chat
+                chatBtn.style.display = "none";    // Hide the chat button
+            }
+        }
+
+        // Send message to backend and display in chat
+        async function sendMessage() {
+            const userInput = document.getElementById("user-input").value;
+            document.getElementById("user-input").value = "";
+
+            const chatBox = document.getElementById("chat-box");
+            chatBox.innerHTML += `<div class="user-message">${userInput}</div>`;
+
+            const response = await fetch("/get_reply", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({ message: userInput })
+            });
+            const data = await response.json();
+
+            chatBox.innerHTML += `<div class="bot-message">${data.reply}</div>`;
+        }
+    </script>
 </body>
 </html>

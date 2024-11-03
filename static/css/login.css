@@ -1,110 +1,237 @@
-/* General Styles */
-body {
+/* Reset and Body */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
     font-family: Arial, sans-serif;
-    background: url('https://4kwallpapers.com/images/walls/thumbs/19118.png');
-    background-repeat: no-repeat;
-    background-size: cover;
+}
+
+
+
+body {
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Container */
+.container {
     display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
 }
 
-/* Styling for the select dropdown to make it 100% width */
-select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-    box-sizing: border-box; /* Ensures padding is included in width */
-}
-
-
-/* Container for all elements */
-.container {
-    display: flex; /* Use Flexbox for layout */
-    max-width: 1200px; /* Maximum width of container */
-    width: 100%; /* Full width */
-    border-radius: 10px; /* Rounded corners */
-    overflow: hidden; /* Hide overflow */
-}
-
-/* Left side styling */
+/* Left Side Styling */
 .left-side {
-    flex: 1; /* Take up half of the container */
-    background-color: rgba(255, 255, 255, 0.9); /* Light background */
-    padding: 20px;
+    flex: 1;
+    background-color: #273BE2; /* Accent color */
+    color: white;
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.left-side h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.left-side p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
 }
 
 .welcome-image {
-    max-width: 100%; /* Make image responsive */
-    height: auto; /* Maintain aspect ratio */
+    max-width: 80%;
+    height: auto;
+    border-radius: 10px; /* Optional: Rounded corners */
 }
 
-/* Right side styling */
+/* Right Side Styling */
 .right-side {
-    flex: 1; /* Take up half of the container */
-    background-color: rgba(230, 230, 230, 0.9); /* Slightly darker background */
-    padding: 30px;
+    flex: 1;
+    background: url('https://wallpaperaccess.com/full/2886084.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-/* Heading and form styles */
-h2 {
-    text-align: center;
+.right-side h2 {
+    font-size: 2rem;
+    color: #273BE2; /* Accent color */
     margin-bottom: 20px;
-    color: #4CAF50; /* Primary accent color for headings */
+}
+
+.right-side form {
+    width: 100%;
+    max-width: 400px; /* Restrict max width for better appearance */
+    display: flex;
+    flex-direction: column;
 }
 
 label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 16px;
+    margin-bottom: 8px;
+    font-weight: bold;
 }
 
-input[type="email"],
-input[type="password"],
-input[type="text"]
- {
-    width: 100%;
+input {
     padding: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    font-size: 1rem;
+}
+
+input:focus {
+    border-color: #273BE2; /* Change border color on focus */
+    outline: none;
 }
 
 button {
-    width: 100%;
     padding: 10px;
-    background-color: #4CAF50; /* Primary button color */
-    color: white;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    background-color: #273BE2; /* Accent color */
+    color: white;
+    font-size: 1.1rem;
     cursor: pointer;
+    transition: background 0.3s;
 }
 
 button:hover {
-    background-color: #388E3C; /* Darker green on hover */
+    background-color: #1a1f9b; /* Darker shade on hover */
 }
 
-p {
-    text-align: center;
+/* Footer Link Styling */
+.right-side p {
     margin-top: 20px;
+    font-size: 0.9rem;
 }
 
-a {
-    color: #4CAF50; /* Primary link color */
+.right-side a {
+    color: #273BE2; /* Accent color */
     text-decoration: none;
 }
 
-a:hover {
+.right-side a:hover {
     text-decoration: underline;
+}
+ /* Popup chat styles */
+ .chat-popup {
+    position: fixed;
+    bottom: 0;
+    right: 20px;
+    width: 300px;
+    display: none;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.chat-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 8px 8px 0 0;
+}
+
+.close-btn {
+    font-size: 18px;
+    cursor: pointer;
+    color: white;
+    background: transparent;
+    border: none;
+}
+
+.chat-container {
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.user-message, .bot-message {
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.user-message {
+    background-color: #d1e7dd;
+    text-align: right;
+}
+
+.bot-message {
+    background-color: #f8d7da;
+}
+
+/* Minimized chat button */
+.chat-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* Container for input and button */
+.input-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Style for the text input */
+#user-input {
+    flex: 1;  /* Take up remaining space */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s;
+    margin: 5px;
+}
+
+#user-input:focus {
+    border-color: #007bff;
+    margin: 5px;
+}
+
+/* Style for the send button */
+button[onclick="sendMessage()"] {
+    padding: 10px 15px;
+    font-size: 16px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    margin-left: 8px;  /* Space between input and button */
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+button[onclick="sendMessage()"]:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }

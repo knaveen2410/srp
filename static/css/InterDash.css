@@ -1,167 +1,250 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
+/* General resets */
+* {
     margin: 0;
     padding: 0;
-    background: #817e7e;
-    color: #333;
+    box-sizing: border-box;
 }
 
-header {
-    background-color: #4CAF50;
-    color: white;
-    padding: 15px 0;
-    text-align: center;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9; /* Light background color for the entire page */
 }
 
-h1 {
-    margin: 0;
-    font-size: 28px;
-}
-
-h2 {
-    font-size: 24px;
-    color: #4CAF50;
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-/* Section Styling */
-.interview-schedule {
-    width: 80%;
-    margin: 30px auto;
-    padding: 20px;
-    background-color: white;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
-
-/* Table Styles */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #4CAF50;
-    color: white;
-}
-
-td {
-    background-color: #f9f9f9;
-}
-
-tr:hover {
-    background-color: #f1f1f1;
-}
-
-a {
-    text-decoration: none;
-    color: #4CAF50;
-    font-weight: bold;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .interview-schedule {
-        width: 95%;
-        padding: 15px;
-    }
-
-    table, thead, tbody, th, td, tr {
-        display: block;
-    }
-
-    tr {
-        margin-bottom: 15px;
-    }
-
-    th, td {
-        padding: 10px;
-        text-align: right;
-    }
-
-    th {
-        text-align: left;
-        background-color: #4CAF50;
-        color: white;
-    }
-}
-header {
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #273BE2; /* Dark header */
+    color: #fff;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px;
-    background-color: #4CAF50;
-    color: white;
+    padding: 1rem;
+    z-index: 1000;
 }
 
-header h1 {
-    padding-left: 390px;
+.fixed-header h1 {
     margin: 0;
+    font-size: 1.5rem;
+}
+.fixed-header h2{
+    color: #fff;
 }
 
 .logout-button {
-    background-color: #f44336;
-    color: white;
-    border: none;
-    padding: 10px 20px;
+    color: #fff;
+    background-color: #f05454; /* Logout button color */
+    padding: 0.5rem 1rem;
     text-decoration: none;
     border-radius: 5px;
-    font-size: 14px;
 }
 
-.logout-button:hover {
-    background-color: #d32f2f;
+.main-content {
+    display: flex;
+    padding-top: 80px; /* Offset for fixed header */
 }
 
-/* Styling the table */
-table {
+.left-panel, .right-panel {
+    padding: 2rem;
+}
+
+.left-panel {
+    position: fixed;
+    width: 17%;
+    background-color: #273BE2; /* White background for left panel */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+}
+
+.right-panel {
+    padding-left: 20%;
     width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+    background-color: #dddada; /* White background for right panel */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    height: 100vh;
 }
 
-table th, table td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-table th {
-    background-color: #4CAF50;
-    color: white;
-}
-
-/* General page styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    margin: 0;
-    padding: 0;
+h2 {
+    margin-bottom: 1.5rem; /* Increased margin for section titles */
+    color: #273BE2;
+    border-bottom: 2px solid #273BE2;
 }
 
 .button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
+    display: block;
+    margin: 1rem 0; /* Margin between buttons */
+    padding: 0.5rem 1rem;
+    color: #fff;
+    background-color: #273BE2; /* Button color */
     text-decoration: none;
+    text-align: center;
     border-radius: 5px;
-    margin-top: 20px;
+    transition: background-color 0.3s; /* Transition effect on hover */
 }
 
 .button:hover {
-    background-color: #45a049;
+    background-color: #4753c4;
+    transform: translateY(-2px);
+}
+.brand-logo {
+    text-align: center;
+}
+.down-image img{
+    width: 190px;
+}
+.down-image{
+    margin-bottom: 15px;
+}
+.brand-logo img {
+    width: 80px;
+    margin-bottom: 10px;
+}
+.button:active {
+    background-color: #3d4ba5;
+    transform: translateY(0);
+}
+.left-panel a {
+    display: block;
+    padding: 12px 20px;
+    margin-bottom: 15px;
+    background-color: #5c67f2;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 1em;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.card-container {
+    display: flex;
+    gap: 1.5rem; /* Increased gap between cards */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.card {
+    background-color: #fff; /* White background for each card */
+    padding: 1.5rem;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 360px;
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem; /* Margin below card titles */
+    color: #273BE2;
+}
+
+.card p {
+    margin-bottom: 0.5rem; /* Margin below paragraphs */
+    font-size: 1rem;
+}
+
+.no-schedules {
+    color: #555;
+    font-size: 1rem;
+    padding: 1rem;
+}
+
+/* General Footer Styles */
+.footer {
+    background-color: #282c34; /* Dark background */
+    color: #ffffff; /* White text */
+    padding: 40px 20px; /* Padding for top and bottom, and side */
+    display: flex;
+    flex-direction: column; /* Stack sections vertically */
+    justify-content: center; /* Center items vertically */
+    align-items: center; /* Center items horizontally */
+    margin-left: 250px;
+}
+.footer h1{
+    padding: 15px 15px;
+    color: #273BE2;
+}
+
+/* Footer Content */
+.footer-content {
+    max-width: 1200px; /* Max width for content */
+    width: 100%; /* Full width */
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping of sections */
+    justify-content: space-between; /* Space between sections */
+}
+
+/* Footer Sections */
+.footer-section {
+    flex: 1 1 calc(33.333% - 20px); /* Each section takes 1/3 of the row with space */
+    margin: 10px; /* Margin around each section */
+    min-width: 250px; /* Minimum width for smaller screens */
+    box-sizing: border-box; /* Ensure padding is included in width calculations */
+}
+
+/* Headings */
+.footer-section h3 {
+    display: flex; /* Flex for icon and text alignment */
+    align-items: center; /* Center the icon and text */
+    font-size: 20px; /* Font size for headings */
+    margin-bottom: 10px; /* Margin below headings */
+}
+
+/* Icons */
+.footer-section h3 i {
+    margin-right: 10px; /* Space between icon and text */
+    color: #273BE2; /* Change icon color */
+    font-size: 24px; /* Icon size */
+}
+
+/* Links */
+.footer-section a {
+    color: #ffffff; /* Link color */
+    text-decoration: none; /* Remove underline */
+    display: block; /* Block display for better spacing */
+    margin: 5px 0; /* Margin for links */
+}
+
+.footer-section a:hover {
+    color: #273BE2; /* Change color on hover */
+}
+
+/* Newsletter Form */
+.newsletter form {
+    display: flex; /* Flex for form elements */
+    margin-top: 10px; /* Margin on top of the form */
+}
+
+.newsletter input[type="email"] {
+    padding: 10px; /* Padding for input */
+    border: none; /* Remove border */
+    border-radius: 5px 0 0 5px; /* Rounded corners for left side */
+    flex: 1; /* Input takes full width */
+}
+
+.newsletter button {
+    padding: 10px; /* Padding for button */
+    border: none; /* Remove border */
+    background-color: #273BE2; /* Button background color */
+    color: #ffffff; /* Button text color */
+    border-radius: 0 5px 5px 0; /* Rounded corners for right side */
+    cursor: pointer; /* Cursor style */
+}
+
+.newsletter button:hover {
+    background-color: #273BE2; /* Darker blue on hover */
+}
+
+/* Copyright */
+.copyright {
+    text-align: center; /* Center text */
+    margin-top: 20px; /* Margin above copyright */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column; /* Stack sections vertically on smaller screens */
+        align-items: center; /* Center items */
+    }
 }

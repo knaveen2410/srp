@@ -2,74 +2,123 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Greport.css') }}">
-    <title>Report</title>
 </head>
 <body>
     <div class="container">
-        <h2>Report</h2>
-        
-        <h3>Job Postings</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Job Title</th>
-                    <th>Department</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for job in job_postings %}
-                <tr>
-                    <td>{{ job.job_title }}</td>
-                    <td>{{ job.department }}</td>
-                    <td>{{ job.status }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <div class="left-column">
+            
+            <h1>Smart Recruting Report</h1>
+            <button id="downloadImage">Download Report</button>
 
-        <h3>Applications</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Candidate Name</th>
-                    <th>Job Title</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for application in applications %}
-                <tr>
-                    <td>{{ application.candidate_name }}</td>
-                    <td>{{ application.job_title }}</td>
-                    <td>{{ application.status }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+            <!-- Group 1: Total Applications, Interviews, and Job Postings -->
+            <div class="group">
+                <div class="group-item">
+                    <h2>Total Job Applications</h2>
+                    <p>{{ total_applications.total_applications }}</p>
+                </div>
+                <div class="group-item">
+                    <h2>Total Interviews Scheduled</h2>
+                    <p>{{ total_interviews.total_interviews }}</p>
+                </div>
+                <div class="group-item">
+                    <h2>Total Job Postings</h2>
+                    <p>{{ total_job_postings.total_job_postings }}</p>
+                </div>
+            </div>
 
-        <h3>Interview Schedules</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Interview Date</th>
-                    <th>Interview Time</th>
-                    <th>Interviewers</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for schedule in interview_schedules %}
-                <tr>
-                    <td>{{ schedule.interview_date }}</td>
-                    <td>{{ schedule.interview_time }}</td>
-                    <td>{{ schedule.interviewers }}</td>
-                </tr>
+            <!-- Group 2: Applications per Job, Users by Role, Application Status Counts -->
+            <div class="group">
+                <div class="group-item">
+                    <h2>Applications per Job</h2>
+                    <table>
+                        <tr><th>Job Title</th><th>Applications Count</th></tr>
+                        {% for job in applications_per_job %}
+                            <tr><td>{{ job.job_title }}</td><td>{{ job.applications_count }}</td></tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="group-item">
+                    <h2>Users by Role</h2>
+                    <table>
+                        <tr><th>Role</th><th>Count</th></tr>
+                        {% for role in users_by_role %}
+                            <tr><td>{{ role.role }}</td><td>{{ role.role_count }}</td></tr>
+                        {% endfor %}
+                    </table>
+                </div>
+                <div class="group-item">
+                    <h2>Application Status Counts</h2>
+                    <table>
+                        <tr><th>Status</th><th>Count</th></tr>
+                        {% for status in application_status_counts %}
+                            <tr><td>{{ status.status }}</td><td>{{ status.count }}</td></tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        <div class="remain">
+            <!-- Remaining Sections -->
+             <div>
+            <h2>Recent Applications</h2>
+            <table>
+                <tr><th>Candidate Name</th><th>Job Title</th><th>Submission Date</th></tr>
+                {% for app in recent_applications %}
+                    <tr>
+                        <td>{{ app.candidate_name }}</td>
+                        <td>{{ app.job_title }}</td>
+                        <td>{{ app.submission_date }}</td>
+                    </tr>
                 {% endfor %}
-            </tbody>
-        </table>
+            </table>
+            </div>
+        <div>
+            <h2>Upcoming Interviews</h2>
+            <table>
+                <tr><th>Candidate Name</th><th>Date</th><th>Time</th><th>Interviewers</th></tr>
+                {% for interview in upcoming_interviews %}
+                    <tr>
+                        <td>{{ interview.candidate_name }}</td>
+                        <td>{{ interview.interview_date }}</td>
+                        <td>{{ interview.interview_time }}</td>
+                        <td>{{ interview.interviewers }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div>
 
+            <h2>Job Postings</h2>
+            <table>
+                <tr><th>Job Title</th><th>Department</th><th>Location</th><th>Status</th><th>Created At</th></tr>
+                {% for posting in job_postings %}
+                    <tr>
+                        <td>{{ posting.job_title }}</td>
+                        <td>{{ posting.department }}</td>
+                        <td>{{ posting.job_location }}</td>
+                        <td>{{ posting.status }}</td>
+                        <td>{{ posting.created_at }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    <div>
+            <h2>Candidates with Job Applications</h2>
+            <table>
+                <tr><th>Candidate Name</th><th>Job Title</th><th>Status</th><th>Submission Date</th></tr>
+                {% for candidate in candidates_with_applications %}
+                    <tr>
+                        <td>{{ candidate.candidate_name }}</td>
+                        <td>{{ candidate.job_title }}</td>
+                        <td>{{ candidate.status }}</td>
+                        <td>{{ candidate.submission_date }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        </div>
+        </div>
         <p>
             {% if session['role'] == 'HR Manager' %}
                 <a href="{{ url_for('hr_dashboard') }}">Back to HR Dashboard</a>
@@ -84,5 +133,17 @@
             {% endif %}
         </p>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script> // Image Download
+        document.getElementById('downloadImage').addEventListener('click', function () {
+            html2canvas(document.querySelector('.container')).then(canvas => {
+                const link = document.createElement('a');
+                link.href = canvas.toDataURL('image/png');
+                link.download = 'Report.png';
+                link.click();
+            });
+        });
+    </script>
 </body>
 </html>

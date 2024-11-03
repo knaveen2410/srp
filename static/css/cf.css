@@ -1,91 +1,105 @@
-/* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
+/* Basic Reset */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-.feedback-container {
-    width: 80%;
-    margin: 50px auto;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Left Section Styling */
+.left-section {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f6f9;
     padding: 20px;
-    background-color: white;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
 }
 
-h2 {
-    text-align: center;
-    color: #4CAF50;
-    font-size: 26px;
+.left-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Right Section Styling */
+.right-section {
+    width: 60%;
+    padding: 20px;
+    background-color: #ffffff;
+    overflow-y: auto;
+}
+
+.right-section h2 {
+    font-size: 1.5em;
+    color: #273BE2;
+    border-bottom:2px solid #273BE2 ;
     margin-bottom: 20px;
 }
 
-/* Table Styles */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+/* Feedback Cards */
+.feedback-cards {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
-th, td {
-    padding: 12px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
+.feedback-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
 }
 
-th {
-    background-color: #4CAF50;
-    color: white;
+.feedback-card p {
+    margin: 8px 0;
+    font-size: 0.9em;
+    color: #333;
 }
 
-td {
-    background-color: #f9f9f9;
+.feedback-card p strong {
+    color: #273BE2;
 }
 
-tr:hover {
-    background-color: #f1f1f1;
+
+
+/* Scrollbar Hide */
+.right-section {
+    scrollbar-width: none; /* Firefox */
 }
 
-/* Link Styles */
-a {
-    text-decoration: none;
-    color: #4CAF50;
+.right-section::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+
+
+.dashboard-link {
+    display: inline-block;
+    color: #273BE2;
     font-weight: bold;
+    text-decoration: none;
+    border: 1px solid #273BE2;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    margin-top: 15px;
+    
 }
 
-a:hover {
-    text-decoration: underline;
-}
-
-p {
-    text-align: center;
-    margin-top: 20px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .feedback-container {
-        width: 95%;
-    }
-
-    table, thead, tbody, th, td, tr {
-        display: block;
-    }
-
-    tr {
-        margin-bottom: 15px;
-    }
-
-    th, td {
-        padding: 10px;
-        text-align: right;
-    }
-
-    th {
-        text-align: left;
-        background-color: #4CAF50;
-    }
+.dashboard-link:hover {
+    background-color: #273BE2;
+    color: #ffffff;
 }

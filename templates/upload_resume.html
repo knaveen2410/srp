@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/uploadR.css') }}">
+    <title>Upload Resume</title>
+
+</head>
+<body>
+    <div class="container">
+    <div class="left">
+    <h1>Upload Resume</h1>
+    <form action="{{ url_for('upload_resume') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="resume" required>
+        <input type="submit" value="Parse Resume">
+    </form>
+    <p>
+        {% if session['role'] == 'Admin' %}
+            <a href="{{ url_for('admin_dashboard') }}">Back to Admin Dashboard</a>
+        {% elif session['role'] == 'Candidate' %}
+            <a href="{{ url_for('candidate_dashboard') }}">Back to Candidate Dashboard</a>
+        {% endif %}
+    </p>
+</div>
+    
+<div class="right">
+    <h1>Resume Parser</h1> 
+    {% if parsed_text %}
+    <h2>Parsed Text:</h2>
+    <div class="parse"><button onclick="reloadPage()">Re-Generate</button>
+        {{ parsed_text | safe }}
+        
+    </div>
+    {% endif %}
+</div>
+
+</div>
+<script>
+    function reloadPage() {
+        window.location.reload();
+    }
+</script>
+</body>
+</html>

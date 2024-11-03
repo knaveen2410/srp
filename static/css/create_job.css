@@ -1,89 +1,150 @@
-body {
-    font-family: Arial, sans-serif;
-    /* background: url('https://www.wallpapertip.com/wmimgs/66-666819_website-design-background-creative-background-image-for-website.jpg'); */
+/* General Reset */
+* {
+    box-sizing: border-box;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
 }
 
+/* Body */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #f4f7fa;
+}
+
+/* Form Container */
 .form-container {
-    background-color: #ffffff;
+    width: 90%;
+    max-width: 1200px;
+    background: #ffffff;
     border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    max-width: 800px; /* Increased width for two columns */
-    margin: 0 auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 2em;
 }
 
-h2 {
-    text-align: center;
+/* Columns Layout */
+.form-columns {
+    display: flex;
+    gap: 2em;
+    width: 100%;
+}
+
+/* Individual Column */
+.form-column {
+    flex: 1;
+    padding: 1em;
+}
+
+/* Section Header */
+h3 {
+    margin-bottom: 1em;
+    color: #273BE2;
+    font-size: 1.5em;
+    font-weight: 600;
+    border-bottom: 2px solid #273BE2;
+    padding-bottom: 0.5em;
+}
+
+/* Form Row Styles */
+.form-row {
+    margin-bottom: 1.5em;
+}
+
+/* Label Styles */
+label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: bold;
     color: #333;
 }
 
-.form-row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 15px;
-}
-
-label {
-    flex: 0 0 30%; /* Adjust the label width */
-    margin-bottom: 5px;
-    color: #555;
-}
-
+/* Input and Textarea Styles */
 input[type="text"],
 input[type="date"],
 textarea,
 select {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #ddd;
+    width: 100%;
+    padding: 0.75em;
+    border: 1px solid #ced4da;
     border-radius: 4px;
-    font-size: 16px;
-    margin-left: 10px; /* Space between label and input */
+    background: #f8f9fa;
+    font-size: 1em;
+    color: #495057;
+    transition: border-color 0.2s;
 }
 
 input[type="text"]:focus,
+input[type="date"]:focus,
 textarea:focus,
 select:focus {
-    border-color: #4CAF50; /* Focus border color */
+    border-color: #273BE2;
     outline: none;
 }
 
-textarea {
-    resize: vertical; /* Allow vertical resizing only */
-}
-
+/* Button Group */
 .button-group {
-    display: flex;
-    justify-content: space-between;
-}
-
-input[type="submit"] {
-    background-color: #4CAF50; /* Primary button color */
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 10px 15px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s;
-}
-
-input[type="submit"]:hover {
-    background-color: #45a049; /* Darker button color on hover */
-}
-
-p {
     text-align: center;
-    margin-top: 20px;
+    padding-top: 2em;
 }
 
-a {
-    color: #4CAF50; /* Link color */
+/* Button Styles */
+.button-group input[type="submit"] {
+    padding: 0.75em 2em;
+    margin: 0 0.5em;
+    border: none;
+    border-radius: 20px;
+    background: #273BE2;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.button-group input[type="submit"]:hover {
+    background: #1e3c7f;
+}
+
+/* Link Styles */
+
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .form-columns {
+        flex-direction: column;
+        gap: 1em;
+    }
+}
+.ding{
+    display: flex; /* Enables Flexbox */
+    width: 100%; /* Full width of the body */
+    height: 100vh; /* Full height of the viewport */
+
+}
+/* Left Column */
+.left {
+    flex: 1; /* Takes up equal space */
+    background: url('https://img.freepik.com/free-vector/laptop-isometric-hiring-illustration_23-2148085112.jpg?ga=GA1.1.1004549663.1730185390&semt=ais_hybrid');
+    padding: 20px; /* Some padding */
+}
+
+p a {
+    display: inline-block;
+    color: #273BE2;
+    font-weight: bold;
+    text-align: center;
     text-decoration: none;
+    border: 1px solid #273BE2;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.3s;
+    margin-top: 15px;
+    
 }
 
-a:hover {
-    text-decoration: underline; /* Underline on hover */
+p a:hover {
+    background-color: #273BE2;
+    color: #ffffff;
 }

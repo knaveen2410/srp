@@ -4,43 +4,95 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/InterDash.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Interviewer Dashboard</title>
-
 </head>
 <body>
-    <header>
-        <h1>Smart Recruitment Platform Interviewer Dashboard</h1>
-        <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
-    </header>
+    <header class="fixed-header"><h1>Welcome, {{ username }}</h1>
+        <h2>View upcoming interviews, candidates, and key details all in one place.</h2>
+        <p>Logged in Time: {{ current_time }}</p>
+        </header>
     
-    <section class="interview-schedule">
-        <h2>Interview Schedule</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Application ID</th>
-                    <th>Candidate Name</th>
-                    <th>Interview Date</th>
-                    <th>Interview Time</th>
-                    <th>Interviewers</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for schedule in schedules %}
-                <tr>
-                    <td>{{ schedule.application_id }}</td>
-                    <td>{{ schedule.candidate_name }}</td>
-                    <td>{{ schedule.interview_date }}</td>
-                    <td>{{ schedule.interview_time }}</td>
-                    <td>{{ schedule.interviewers }}</td>
-                    <td>
-                        <a href="{{ url_for('submit_feedback', interview_schedule_id=schedule.id) }}">Submit Feedback</a>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </section>
+    <main class="main-content">
+        <section class="left-panel">
+            <div class="brand-logo">
+                <img src="https://th.bing.com/th/id/OIP.w1iz5yi0zSryHoiEhLNeRgHaHa?w=170&h=180&c=7&r=0&o=5&pid=1.7" alt="Brand Logo">
+            </div>
+            <a href="{{ url_for('view_interviews') }}" class="button">Delete or Reschedule</a>
+            <a href="{{ url_for('view_candidates') }}" class="button">View Candidates</a>
+            <a href="{{ url_for('logout') }}" class="button">Logout</a>
+            <div class = "down-image">
+                <img src="https://i.ibb.co/Q85Ggh1/showing.png" alt="showing" border="0" />
+            </div>
+        </section>
+        
+        
+        <section class="right-panel">
+            <h2>Upcoming Interviews</h2>
+            <div class="card-container">
+                {% if schedules %}
+                    {% for schedule in schedules %}
+                        <div class="card">
+                            <h3>Application ID: {{ schedule.application_id }}</h3>
+                            <p><strong>Candidate:</strong> {{ schedule.candidate_name }}</p>
+                            <p><strong>Date:</strong> {{ schedule.interview_date }}</p>
+                            <p><strong>Time:</strong> {{ schedule.interview_time }}</p>
+                            <p><strong>Interviewers:</strong> {{ schedule.interviewer_names }}</p>
+                            <div class="action"><a href="{{ url_for('submit_feedback', interview_schedule_id=schedule.interview_id, candidate_name=schedule.candidate_name) }}" class="button">Submit Feedback</a>
+
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="no-schedules">No interview schedules available.</p>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <h1>Smart Recruiting Platform</h1>
+        <div class="footer-content">
+            <div class="footer-section contact-info">
+                <h3><i class="fas fa-envelope"></i> Contact Us</h3>
+                <p>Email: <a href="mailto:smartrecruting@gmail.com">smartrecruting@gmail.com</a></p>
+                <p>Phone: <a href="tel:+9194939798440">+91 949397 98440</a></p>
+                <p>No.42, Avadi-Vel Tech Road, Vel Nagar, Avadi, Chennai – 600 062, Tamil Nadu, India.</p>
+            </div>
+            <div class="footer-section social-media">
+                <h3><i class="fab fa-facebook-f"></i> Follow Us</h3>
+                <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+                <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
+                <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+                <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+            </div>
+            
+            <div class="footer-section newsletter">
+                <h3><i class="fas fa-paper-plane"></i> Subscribe to Our Newsletter</h3>
+                <p>Stay updated with the latest news and offers. Enter your email below:</p>
+                <form action="#" method="post">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+            <div class="footer-section additional-content">
+                <h3><i class="fas fa-info-circle"></i> About Us</h3>
+                <p>We are committed to providing the best service. Our team is dedicated to meeting your needs.</p>
+            </div>
+            <div class="footer-section faq">
+                <h3><i class="fas fa-question-circle"></i> Frequently Asked Questions</h3>
+                <ul>
+                    <li><a href="#faq1">What services do you offer?</a></li>
+                    <li><a href="#faq2">How can I contact support?</a></li>
+                    <li><a href="#faq3">Where are you located?</a></li>
+                    <li><a href="#faq4">Do you offer refunds?</a></li>
+                </ul>
+            </div>
+            <div class="footer-section copyright">
+                <p>&copy; 2024 Smart Recruiting Platform. All Rights Reserved.</p>
+            </div>
+
+
+        </div>
+    </footer>
 </body>
 </html>
